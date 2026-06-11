@@ -4,6 +4,7 @@ import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { LearningRoadmap } from "@/components/dashboard/LearningRoadmap";
 import { ProgressTracker } from "@/components/dashboard/ProgressTracker";
 import { SkillGapAnalysis } from "@/components/dashboard/SkillGapAnalysis";
+import { SectionCard } from "@/components/dashboard/SectionCard";
 import { CareerGoalHero } from "@/components/dashboard/CareerGoalHero";
 import { useDashboardData } from "@/hooks/useDashboardData";
 import { api } from "@/services/api";
@@ -51,6 +52,9 @@ function DashboardPage() {
               if (!opt) return;
               setGoalState((s) => (s ? { ...s, selected: id, nextSkill: s.nextSkill } : s));
             }}
+            onStartLearning={() => {
+              // Placeholder for learning start action
+            }}
           />
         </div>
       )}
@@ -59,11 +63,35 @@ function DashboardPage() {
         {/* Left: Skill Gap */}
         <div className="flex flex-col gap-5">
           {skillGap && <SkillGapAnalysis gap={skillGap} />}
+
+          <SectionCard title="AI Mentor" action="Open Resources" actionArrow>
+            <div className="space-y-3">
+              <div className="rounded-2xl bg-card-elevated p-4">
+                <p className="text-sm text-foreground font-medium">Next Skill: React</p>
+                <p className="text-sm text-muted-foreground">Difficulty: Intermediate</p>
+                <p className="text-sm text-muted-foreground">Duration: 4 Weeks</p>
+              </div>
+
+              <div className="rounded-2xl bg-card-elevated p-4">
+                <p className="text-sm text-muted-foreground">Why learn this?</p>
+                <p className="text-sm text-foreground">
+                  React is required by 82% of frontend jobs...
+                </p>
+              </div>
+            </div>
+          </SectionCard>
         </div>
 
         {/* Right: Learning Roadmap + Progress */}
         <div className="flex flex-col gap-5">
-          <LearningRoadmap items={roadmap} />
+          <LearningRoadmap
+            items={roadmap}
+            onComplete={async (skill) => {
+              await api.markSkillComplete(skill);
+
+              window.location.reload();
+            }}
+          />
           {progress && <ProgressTracker stats={progress} />}
         </div>
       </div>

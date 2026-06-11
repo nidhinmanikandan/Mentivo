@@ -3,7 +3,12 @@ import { motion } from "motion/react";
 import { SectionCard } from "./SectionCard";
 import type { RoadmapItem } from "@/types";
 
-export function LearningRoadmap({ items }: { items: RoadmapItem[] }) {
+interface Props {
+  items: RoadmapItem[];
+  onComplete?: (skill: string) => void;
+}
+
+export function LearningRoadmap({ items, onComplete }: Props) {
   return (
     <SectionCard title="Learning Roadmap" action="View roadmap">
       <div className="relative pl-2">
@@ -18,15 +23,26 @@ export function LearningRoadmap({ items }: { items: RoadmapItem[] }) {
                 item.status === "completed"
                   ? "bg-success/20 text-success"
                   : item.status === "active"
-                  ? "bg-card-elevated text-foreground"
-                  : "bg-card-elevated text-muted-foreground"
+                    ? "bg-card-elevated text-foreground"
+                    : "bg-card-elevated text-muted-foreground"
               }`}
             >
               {item.status === "completed" ? <Check className="h-4 w-4" /> : item.step}
             </div>
             <div className="flex-1 pt-1">
               <div className="flex items-center justify-between gap-3">
-                <p className="text-[13px] font-medium text-foreground">{item.title}</p>
+                <div className="flex items-center justify-between">
+                  <p className="text-[13px] font-medium text-foreground">{item.title}</p>
+
+                  {item.status !== "completed" && (
+                    <button
+                      onClick={() => onComplete?.(item.title)}
+                      className="text-[10px] px-2 py-1 rounded-md bg-primary text-primary-foreground"
+                    >
+                      Complete
+                    </button>
+                  )}
+                </div>
                 {item.status === "completed" ? (
                   <span className="text-[11px] text-muted-foreground">Completed</span>
                 ) : (

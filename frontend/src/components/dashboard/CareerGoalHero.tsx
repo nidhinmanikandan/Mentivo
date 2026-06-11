@@ -7,9 +7,10 @@ interface Props {
   state: CareerGoalState;
   options: CareerGoalOption[];
   onSelect: (id: CareerGoalState["selected"]) => void;
+  onStartLearning: () => void;
 }
 
-export function CareerGoalHero({ state, options, onSelect }: Props) {
+export function CareerGoalHero({ state, options, onSelect, onStartLearning, }: Props) {
   const [open, setOpen] = useState(false);
   const current = options.find((o) => o.id === state.selected) ?? options[0];
 
@@ -21,7 +22,9 @@ export function CareerGoalHero({ state, options, onSelect }: Props) {
       className="relative overflow-hidden rounded-3xl bg-card p-6 shadow-card"
     >
       {/* glow */}
-      <div className={`pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-gradient-to-br ${current.accent} opacity-20 blur-3xl`} />
+      <div
+        className={`pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-gradient-to-br ${current.accent} opacity-20 blur-3xl`}
+      />
 
       <div className="relative flex flex-col lg:flex-row lg:items-center gap-6">
         <div className="flex-1 min-w-0">
@@ -35,7 +38,9 @@ export function CareerGoalHero({ state, options, onSelect }: Props) {
               onClick={() => setOpen((v) => !v)}
               className="group flex items-center gap-3 rounded-2xl bg-card-elevated px-3 py-2 hover:opacity-90 transition"
             >
-              <div className={`h-10 w-10 rounded-xl bg-gradient-to-br ${current.accent} grid place-items-center text-lg`}>
+              <div
+                className={`h-10 w-10 rounded-xl bg-gradient-to-br ${current.accent} grid place-items-center text-lg`}
+              >
                 {current.icon}
               </div>
               <div className="text-left">
@@ -44,7 +49,9 @@ export function CareerGoalHero({ state, options, onSelect }: Props) {
                 </p>
                 <p className="text-[11px] text-muted-foreground">{current.description}</p>
               </div>
-              <ChevronDown className={`h-4 w-4 text-muted-foreground transition ${open ? "rotate-180" : ""}`} />
+              <ChevronDown
+                className={`h-4 w-4 text-muted-foreground transition ${open ? "rotate-180" : ""}`}
+              />
             </button>
 
             {open && (
@@ -62,7 +69,9 @@ export function CareerGoalHero({ state, options, onSelect }: Props) {
                     }}
                     className="w-full flex items-center gap-3 rounded-xl p-2 hover:bg-background/40 transition text-left"
                   >
-                    <div className={`h-9 w-9 rounded-lg bg-gradient-to-br ${o.accent} grid place-items-center`}>
+                    <div
+                      className={`h-9 w-9 rounded-lg bg-gradient-to-br ${o.accent} grid place-items-center`}
+                    >
                       {o.icon}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -97,11 +106,38 @@ export function CareerGoalHero({ state, options, onSelect }: Props) {
 
         {/* next skill */}
         <div className="lg:w-64 shrink-0 rounded-2xl bg-card-elevated p-4">
-          <p className="text-[11px] uppercase tracking-wider text-muted-foreground mb-2">Next Skill</p>
-          <p className="text-[24px] font-semibold tracking-tight text-foreground mb-3">{state.nextSkill}</p>
-          <button className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-primary py-2 text-[12px] font-semibold text-primary-foreground hover:opacity-90 transition">
-            Start learning <ArrowRight className="h-3.5 w-3.5" />
-          </button>
+          {state.progress === 100 ? (
+            <>
+              <p className="text-[11px] uppercase tracking-wider text-success mb-2">
+                Goal Completed 🎉
+              </p>
+
+              <p className="text-[18px] font-semibold tracking-tight text-foreground mb-3">
+                Frontend Developer Roadmap
+              </p>
+
+              <button className="w-full rounded-xl bg-success py-2 text-[12px] font-semibold text-black">
+                Completed ✓
+              </button>
+            </>
+          ) : (
+            <>
+              <p className="text-[11px] uppercase tracking-wider text-muted-foreground mb-2">
+                Next Skill
+              </p>
+
+              <p className="text-[24px] font-semibold tracking-tight text-foreground mb-3">
+                {state.nextSkill}
+              </p>
+
+              <button
+                onClick={() => console.log("BUTTON CLICKED")}
+                className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-primary py-2 text-[12px] font-semibold text-primary-foreground hover:opacity-90 transition"
+              >
+                Start learning
+              </button>
+            </>
+          )}
         </div>
       </div>
     </motion.section>
