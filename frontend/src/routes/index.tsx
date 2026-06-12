@@ -64,12 +64,14 @@ function DashboardPage() {
         <div className="flex flex-col gap-5">
           {skillGap && <SkillGapAnalysis gap={skillGap} />}
 
-          <SectionCard title="AI Mentor" action="Open Resources" actionArrow>
+          <SectionCard title="AI Mentor">
             <div className="space-y-3">
               <div className="rounded-2xl bg-card-elevated p-4">
-                <p className="text-sm text-foreground font-medium">Next Skill: React</p>
-                <p className="text-sm text-muted-foreground">Difficulty: Intermediate</p>
-                <p className="text-sm text-muted-foreground">Duration: 4 Weeks</p>
+                <p>Next Skill: {goalState?.mentorData?.nextSkill}</p>
+
+                <p>Difficulty: {goalState?.mentorData?.difficulty}</p>
+
+                <p>Duration: {goalState?.mentorData?.estimatedTime}</p>
               </div>
 
               <div className="rounded-2xl bg-card-elevated p-4">
@@ -77,6 +79,23 @@ function DashboardPage() {
                 <p className="text-sm text-foreground">
                   React is required by 82% of frontend jobs...
                 </p>
+                <div>
+                  <div className="rounded-2xl bg-card-elevated p-4">
+                    <p className="text-sm font-medium mb-3">Learning Resources</p>
+
+                    <div className="space-y-2">
+                      {goalState?.mentorData?.resources?.map((resource) => (
+                        <button
+                          key={resource.url}
+                          onClick={() => window.open(resource.url, "_blank")}
+                          className="w-full text-left rounded-lg bg-background/40 px-3 py-2 hover:bg-background/60 transition"
+                        >
+                          {resource.title}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </SectionCard>

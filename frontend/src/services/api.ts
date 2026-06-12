@@ -120,6 +120,8 @@ export const api = {
       totalSkills: 3,
       progress: Math.round((progress.completedSkills.length / 3) * 100),
       nextSkill: mentor.nextSkill?.skill || "Completed",
+
+      mentorData: mentor,
     };
   },
   markSkillComplete: async (skill: string) => {

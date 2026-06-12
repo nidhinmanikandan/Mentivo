@@ -11,7 +11,6 @@ const careers = {
           url: "https://www.youtube.com/watch?v=UB1O30fR-EE",
         },
       ],
-      
     },
 
     {
@@ -25,7 +24,6 @@ const careers = {
           url: "https://www.youtube.com/watch?v=yfoY53QXEnI",
         },
       ],
-      
     },
 
     {
@@ -38,8 +36,15 @@ const careers = {
           title: "React Tutorial for Beginners",
           url: "https://www.youtube.com/watch?v=Ke90Tje7VS0",
         },
+        {
+          title: "Official React Documentation",
+          url: "https://react.dev",
+        },
+        {
+          title: "React Roadmap",
+          url: "https://roadmap.sh/react",
+        },
       ],
-      
     },
   ],
 
@@ -55,7 +60,6 @@ const careers = {
           url: "https://www.youtube.com/watch?v=3j8s9Xo5n6A",
         },
       ],
-      
     },
     {
       skill: "Figma",
@@ -68,7 +72,6 @@ const careers = {
           url: "https://www.youtube.com/watch?v=FTFaQWZBqQ8",
         },
       ],
-      
     },
     {
       skill: "Design Systems",
@@ -81,7 +84,6 @@ const careers = {
           url: "https://www.youtube.com/watch?v=HqjYl2r9XoQ",
         },
       ],
-      
     },
     {
       skill: "Prototyping",
@@ -94,7 +96,6 @@ const careers = {
           url: "https://www.youtube.com/watch?v=FTFaQWZBqQ8&t=10s",
         },
       ],
-     
     },
     {
       skill: "UX Research",
@@ -107,7 +108,6 @@ const careers = {
           url: "https://www.youtube.com/watch?v=OeX9nqj8s5A",
         },
       ],
-     
     },
   ],
 
@@ -123,7 +123,6 @@ const careers = {
           url: "https://www.youtube.com/watch?v=1gDhl4leEzA",
         },
       ],
-      
     },
     {
       skill: "Dart",
@@ -136,7 +135,6 @@ const careers = {
           url: "https://www.youtube.com/watch?v=Ej_Pcr4uC2Q",
         },
       ],
-      
     },
     {
       skill: "Firebase",
@@ -149,7 +147,6 @@ const careers = {
           url: "https://www.youtube.com/watch?v=9kRgVxULbag",
         },
       ],
-     
     },
     {
       skill: "State Management",
@@ -162,7 +159,6 @@ const careers = {
           url: "https://www.youtube.com/watch?v=Zbm3hjPjQMk",
         },
       ],
-     
     },
   ],
 };

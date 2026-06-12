@@ -31,9 +31,9 @@ export function LearningRoadmap({ items, onComplete }: Props) {
             </div>
             <div className="flex-1 pt-1">
               <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center justify-between">
-                  <p className="text-[13px] font-medium text-foreground">{item.title}</p>
+                <p className="text-[13px] font-medium text-foreground">{item.title}</p>
 
+                <div className="flex items-center gap-2">
                   {item.status !== "completed" && (
                     <button
                       onClick={() => onComplete?.(item.title)}
@@ -42,12 +42,11 @@ export function LearningRoadmap({ items, onComplete }: Props) {
                       Complete
                     </button>
                   )}
+
+                  <span className="text-[11px] text-muted-foreground">
+                    {item.status === "completed" ? "Completed" : `${item.progress}%`}
+                  </span>
                 </div>
-                {item.status === "completed" ? (
-                  <span className="text-[11px] text-muted-foreground">Completed</span>
-                ) : (
-                  <span className="text-[11px] text-muted-foreground">{item.progress}%</span>
-                )}
               </div>
               {item.status !== "completed" && (
                 <div className="mt-2 h-[3px] w-full rounded-full bg-muted overflow-hidden">

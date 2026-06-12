@@ -87,9 +87,19 @@ export interface CareerGoalOption {
 }
 
 export interface CareerGoalState {
-  selected: CareerGoalId;
-  progress: number;
-  nextSkill: string;
+  selected: string;
   completedSkills: number;
   totalSkills: number;
+  progress: number;
+  nextSkill: string;
+
+  mentorData?: {
+    nextSkill: string;
+    difficulty: string;
+    estimatedTime: string;
+    resources: {
+      title: string;
+      url: string;
+    }[];
+  } | null;
 }
