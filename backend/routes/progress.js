@@ -3,8 +3,12 @@ const router = express.Router();
 
 const users = require("../data/users");
 
+
+
 const {
+  getUserProgress,
   addCompletedSkill,
+  changeCareer,
 } = require("../services/progressTracker");
 
 router.get("/:id", (req, res) => {
@@ -34,6 +38,23 @@ router.post("/update", (req, res) => {
 
   res.json({
     message: "Skill added successfully",
+    user: updatedUser,
+  });
+});
+
+router.post("/career", (req, res) => {
+  const { userId, targetRole } = req.body;
+
+  const updatedUser = changeCareer(userId, targetRole);
+
+  if (!updatedUser) {
+    return res.status(404).json({
+      error: "User not found",
+    });
+  }
+
+  res.json({
+    message: "Career changed",
     user: updatedUser,
   });
 });

@@ -138,4 +138,19 @@ export const api = {
 
     return response.json();
   },
+
+  changeCareer: async (targetRole: string) => {
+    const response = await fetch(`${BASE_URL}/api/progress/career`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: 1,
+        targetRole,
+      }),
+    });
+
+    return response.json();
+  },
 };
