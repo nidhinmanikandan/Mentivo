@@ -45,6 +45,7 @@ const careers = {
           url: "https://roadmap.sh/react",
         },
       ],
+      why: "Wireframing helps designers plan layouts and user flows before creating high-fidelity designs.",
     },
   ],
 
@@ -60,6 +61,7 @@ const careers = {
           url: "https://www.youtube.com/watch?v=3j8s9Xo5n6A",
         },
       ],
+      why: "Wireframing helps designers quickly validate ideas before building.",
     },
     {
       skill: "Figma",

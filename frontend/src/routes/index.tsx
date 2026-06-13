@@ -80,9 +80,7 @@ function DashboardPage() {
 
               <div className="rounded-2xl bg-card-elevated p-4">
                 <p className="text-sm text-muted-foreground">Why learn this?</p>
-                <p className="text-sm text-foreground">
-                  React is required by 82% of frontend jobs...
-                </p>
+                <p className="text-sm text-foreground">{goalState?.mentorData?.why}</p>
                 <div>
                   <div className="rounded-2xl bg-card-elevated p-4">
                     <p className="text-sm font-medium mb-3">Learning Resources</p>

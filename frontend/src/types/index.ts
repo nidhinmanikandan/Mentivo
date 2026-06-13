@@ -97,9 +97,11 @@ export interface CareerGoalState {
     nextSkill: string;
     difficulty: string;
     estimatedTime: string;
+    why: string;
     resources: {
       title: string;
       url: string;
     }[];
+    
   } | null;
 }
