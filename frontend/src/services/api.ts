@@ -115,7 +115,14 @@ export const api = {
     console.log("MENTOR DATA", mentor);
 
     return {
-      selected: "frontend",
+      selected:
+        progress.targetRole === "Frontend Developer"
+          ? "frontend"
+          : progress.targetRole === "UI/UX Designer"
+            ? "uiux"
+            : progress.targetRole === "Mobile Developer"
+              ? "mobile"
+              : "ai",
       completedSkills: progress.completedSkills.length,
       totalSkills: 3,
       progress: Math.round((progress.completedSkills.length / 3) * 100),
@@ -153,4 +160,6 @@ export const api = {
 
     return response.json();
   },
+
+  
 };

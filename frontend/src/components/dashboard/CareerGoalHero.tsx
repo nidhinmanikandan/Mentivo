@@ -19,7 +19,7 @@ export function CareerGoalHero({ state, options, onSelect, onStartLearning, }: P
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="relative overflow-hidden rounded-3xl bg-card p-6 shadow-card"
+      className="relative overflow-visible rounded-3xl bg-card p-6 shadow-card"
     >
       {/* glow */}
       <div

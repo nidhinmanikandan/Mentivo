@@ -47,10 +47,14 @@ function DashboardPage() {
           <CareerGoalHero
             state={goalState}
             options={goalOptions}
-            onSelect={(id) => {
+            onSelect={async (id) => {
               const opt = goalOptions.find((o) => o.id === id);
+
               if (!opt) return;
-              setGoalState((s) => (s ? { ...s, selected: id, nextSkill: s.nextSkill } : s));
+
+              await api.changeCareer(opt.label);
+
+              window.location.reload();
             }}
             onStartLearning={() => {
               // Placeholder for learning start action
