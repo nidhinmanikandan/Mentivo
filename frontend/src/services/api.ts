@@ -161,5 +161,9 @@ export const api = {
     return response.json();
   },
 
-  
+  getTools: async () => {
+    const response = await fetch(`${BASE_URL}/api/tools`);
+
+    return response.json();
+  },
 };

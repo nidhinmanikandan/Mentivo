@@ -102,6 +102,13 @@ export interface CareerGoalState {
       title: string;
       url: string;
     }[];
-    
   } | null;
+}
+
+export interface Tool {
+  name: string;
+  category: string;
+  description: string;
+  officialUrl: string;
+  isTrending?: boolean;
 }

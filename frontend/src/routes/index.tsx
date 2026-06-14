@@ -9,6 +9,7 @@ import { CareerGoalHero } from "@/components/dashboard/CareerGoalHero";
 import { useDashboardData } from "@/hooks/useDashboardData";
 import { api } from "@/services/api";
 import type { CareerGoalOption, CareerGoalState } from "@/types";
+import type { Tool } from "@/types";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -24,10 +25,12 @@ function DashboardPage() {
   const { roadmap, progress, skillGap } = useDashboardData();
   const [goalOptions, setGoalOptions] = useState<CareerGoalOption[]>([]);
   const [goalState, setGoalState] = useState<CareerGoalState | null>(null);
+  const [tools, setTools] = useState<Tool[]>([]);
 
   useEffect(() => {
     api.getCareerGoalOptions().then(setGoalOptions);
     api.getCareerGoalState().then(setGoalState);
+    api.getTools().then(setTools);
   }, []);
 
   return (
@@ -115,6 +118,11 @@ function DashboardPage() {
           />
           {progress && <ProgressTracker stats={progress} />}
         </div>
+      </div>
+      <div>
+        {tools.map((tool) => (
+          <p key={tool.name}>{tool.name}</p>
+        ))}
       </div>
     </DashboardLayout>
   );

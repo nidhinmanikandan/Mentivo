@@ -136,6 +136,7 @@ export function CareerGoalHero({ state, options, onSelect, onStartLearning, }: P
               >
                 Start learning
               </button>
+              
             </>
           )}
         </div>

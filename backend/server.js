@@ -11,6 +11,8 @@ const progressRoutes = require("./routes/progress");
 
 const roadmapRoutes = require("./routes/roadmap");
 
+const toolsRoutes = require("./routes/tools");
+
 // Create the Express application instance
 const app = express();
 
@@ -26,6 +28,8 @@ app.use("/api/career/mentor", mentorRoutes);
 app.use("/api/progress", progressRoutes);
 
 app.use("/api/roadmap", roadmapRoutes);
+
+app.use("/api/tools", toolsRoutes);
 
 // Start the server listening on port 5000
 app.listen(5000, () => {
