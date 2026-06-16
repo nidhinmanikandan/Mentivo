@@ -166,4 +166,10 @@ export const api = {
 
     return response.json();
   },
+
+  async getToolRoadmap(toolName: string) {
+    const res = await fetch(`http://localhost:5000/api/tool-roadmap/${toolName}`);
+
+    return res.json();
+  },
 };

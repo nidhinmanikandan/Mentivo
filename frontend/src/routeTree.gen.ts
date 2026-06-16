@@ -13,6 +13,7 @@ import { Route as TrendsRouteImport } from './routes/trends'
 import { Route as RoadmapRouteImport } from './routes/roadmap'
 import { Route as AiToolsRouteImport } from './routes/ai-tools'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ToolToolNameRouteImport } from './routes/tool.$toolName'
 
 const TrendsRoute = TrendsRouteImport.update({
   id: '/trends',
@@ -34,18 +35,25 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolToolNameRoute = ToolToolNameRouteImport.update({
+  id: '/tool/$toolName',
+  path: '/tool/$toolName',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ai-tools': typeof AiToolsRoute
   '/roadmap': typeof RoadmapRoute
   '/trends': typeof TrendsRoute
+  '/tool/$toolName': typeof ToolToolNameRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ai-tools': typeof AiToolsRoute
   '/roadmap': typeof RoadmapRoute
   '/trends': typeof TrendsRoute
+  '/tool/$toolName': typeof ToolToolNameRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,20 @@ export interface FileRoutesById {
   '/ai-tools': typeof AiToolsRoute
   '/roadmap': typeof RoadmapRoute
   '/trends': typeof TrendsRoute
+  '/tool/$toolName': typeof ToolToolNameRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ai-tools' | '/roadmap' | '/trends'
+  fullPaths: '/' | '/ai-tools' | '/roadmap' | '/trends' | '/tool/$toolName'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ai-tools' | '/roadmap' | '/trends'
-  id: '__root__' | '/' | '/ai-tools' | '/roadmap' | '/trends'
+  to: '/' | '/ai-tools' | '/roadmap' | '/trends' | '/tool/$toolName'
+  id:
+    | '__root__'
+    | '/'
+    | '/ai-tools'
+    | '/roadmap'
+    | '/trends'
+    | '/tool/$toolName'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +82,7 @@ export interface RootRouteChildren {
   AiToolsRoute: typeof AiToolsRoute
   RoadmapRoute: typeof RoadmapRoute
   TrendsRoute: typeof TrendsRoute
+  ToolToolNameRoute: typeof ToolToolNameRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +115,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tool/$toolName': {
+      id: '/tool/$toolName'
+      path: '/tool/$toolName'
+      fullPath: '/tool/$toolName'
+      preLoaderRoute: typeof ToolToolNameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +130,7 @@ const rootRouteChildren: RootRouteChildren = {
   AiToolsRoute: AiToolsRoute,
   RoadmapRoute: RoadmapRoute,
   TrendsRoute: TrendsRoute,
+  ToolToolNameRoute: ToolToolNameRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

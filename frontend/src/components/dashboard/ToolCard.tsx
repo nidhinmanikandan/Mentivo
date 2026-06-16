@@ -2,15 +2,23 @@ import { motion } from "motion/react";
 import { Bookmark, ArrowUpRight } from "lucide-react";
 import type { AiTool } from "@/types";
 
-export function ToolCard({ tool }: { tool: AiTool }) {
+type ToolCardProps = {
+  tool: AiTool;
+  onClick?: () => void;
+};
+
+export function ToolCard({ tool, onClick }: ToolCardProps) {
   return (
     <motion.div
+      onClick={onClick}
       whileHover={{ y: -2 }}
       transition={{ duration: 0.2 }}
       className="rounded-2xl bg-card-elevated p-4 hover:bg-accent transition cursor-pointer group"
     >
       <div className="flex items-start gap-3">
-        <div className={`h-11 w-11 rounded-xl bg-gradient-to-br ${tool.logoBg} grid place-items-center text-white text-base font-bold shadow-md`}>
+        <div
+          className={`h-11 w-11 rounded-xl bg-gradient-to-br ${tool.logoBg} grid place-items-center text-white text-base font-bold shadow-md`}
+        >
           {tool.logoText}
         </div>
         <div className="flex-1 min-w-0">
@@ -30,7 +38,9 @@ export function ToolCard({ tool }: { tool: AiTool }) {
       <div className="mt-3 flex items-end justify-between gap-3">
         <div className="flex-1">
           <p className="text-[12px] text-muted-foreground/90 leading-snug">{tool.description}</p>
-          <span className="inline-block mt-2 text-[11px] text-muted-foreground/70">#{tool.tag}</span>
+          <span className="inline-block mt-2 text-[11px] text-muted-foreground/70">
+            #{tool.tag}
+          </span>
         </div>
         <div className="flex items-center gap-1 text-[12px] font-medium text-foreground">
           {tool.popularity}
