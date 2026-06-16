@@ -7,12 +7,15 @@ import {
 
 type NavEntry = { label: string; icon: React.ElementType; to?: string };
 
-const mainNav: NavEntry[] = [
-  { label: "Dashboard", icon: Home, to: "/" },
-  { label: "AI Tools", icon: Wrench },
+const mainNav = [
+  { label: "Discover Tools", icon: Wrench, to: "/" },
+
+  { label: "My Roadmaps", icon: Map, to: "/roadmap" },
+
   { label: "Trends", icon: TrendingUp, to: "/trends" },
-  { label: "Roadmaps", icon: Map },
+
   { label: "Bookmarks", icon: Bookmark },
+
   { label: "Profile", icon: User },
 ];
 
