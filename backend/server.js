@@ -15,6 +15,8 @@ const toolsRoutes = require("./routes/tools");
 
 const toolRoadmapRoute = require("./routes/toolRoadmap");
 
+const profileRoutes = require("./routes/profile");
+
 // Create the Express application instance
 const app = express();
 
@@ -34,6 +36,8 @@ app.use("/api/roadmap", roadmapRoutes);
 app.use("/api/tools", toolsRoutes);
 
 app.use("/api/tool-roadmap", toolRoadmapRoute);
+
+app.use("/api/profile", profileRoutes);
 
 // Start the server listening on port 5000
 app.listen(5000, () => {
