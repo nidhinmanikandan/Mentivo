@@ -21,27 +21,45 @@ function ToolRoadmapPage() {
 
   return (
     <DashboardLayout>
-      <div className="p-8 text-white">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold">{toolName} Learning Roadmap</h1>
+      <div className="max-w-6xl mx-auto">
+        {/* Hero */}
+        <div className="mb-10">
+          <h1 className="text-5xl font-bold text-foreground">{toolName} Learning Roadmap</h1>
 
-          <p className="text-muted-foreground mt-2">Master {toolName} step by step.</p>
+          <p className="mt-3 text-lg text-muted-foreground">Master {toolName} step by step.</p>
         </div>
 
-        <p>Items: {roadmap.length}</p>
+        {/* Progress */}
+        <div className="mb-10">
+          <h2 className="text-lg font-semibold mb-3">Progress</h2>
 
-        <div className="space-y-4 mt-6">
-          {roadmap.map((step, index) => (
-            <div key={index} className="rounded-2xl bg-card p-5">
-              <div className="flex justify-between">
-                <h3 className="font-semibold">{step.skill}</h3>
+          <div className="h-3 rounded-full bg-card-elevated overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-violet-500 to-pink-500"
+              style={{ width: "0%" }}
+            />
+          </div>
 
-                <span>{step.duration}</span>
+          <p className="mt-2 text-sm text-muted-foreground">0% Completed</p>
+        </div>
+
+        {/* Roadmap Steps */}
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Roadmap Steps</h2>
+
+          <div className="space-y-4">
+            {roadmap.map((step, index) => (
+              <div key={index} className="rounded-2xl bg-card p-5">
+                <div className="flex justify-between">
+                  <h3 className="font-semibold">{step.skill}</h3>
+
+                  <span className="text-sm text-muted-foreground">{step.duration}</span>
+                </div>
+
+                <p className="mt-2 text-sm text-muted-foreground">{step.difficulty}</p>
               </div>
-
-              <p className="text-sm text-muted-foreground mt-2">{step.difficulty}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </DashboardLayout>
