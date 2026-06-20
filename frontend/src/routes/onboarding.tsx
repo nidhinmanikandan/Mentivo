@@ -1,9 +1,82 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 
-export const Route = createFileRoute('/onboarding')({
-  component: RouteComponent,
-})
+const roles = ["Frontend Developer", "UI/UX Designer", "AI Engineer", "Mobile Developer"];
+const interests = ["Design", "Development", "AI", "Productivity"];
 
-function RouteComponent() {
-  return <div>Hello "/onboarding"!</div>
+const levels = ["Beginner", "Intermediate", "Advanced"];
+
+export const Route = createFileRoute("/onboarding")({
+  component: OnboardingPage,
+});
+
+function OnboardingPage() {
+  const [step, setStep] = useState(1);
+
+  const [role, setRole] = useState("");
+  const [interest, setInterest] = useState("");
+  const [level, setLevel] = useState("");
+
+  console.log(role);
+  return (
+    <div className="space-y-3 mt-8 p-10">
+      <h1 className="text-4xl font-bold mb-3">What do you want to become?</h1>
+
+      <p className="text-muted-foreground mb-8">We'll personalize your learning journey.</p>
+      {step === 1 && (
+        <>
+          <h1 className="text-4xl font-bold mb-3">What do you want to become?</h1>
+
+          <p className="text-muted-foreground mb-8">We'll personalize your learning journey.</p>
+
+          {roles.map((roleOption) => (
+            <button
+              key={roleOption}
+              onClick={() => setRole(roleOption)}
+              className={`block w-full rounded-xl p-4 text-left ${
+                role === roleOption ? "bg-purple-600" : "bg-card"
+              }`}
+            >
+              {roleOption}
+            </button>
+          ))}
+        </>
+      )}
+      {step === 2 && (
+        <>
+          <h1 className="text-4xl font-bold mb-3">What interests you?</h1>
+
+          {interests.map((interestOption) => (
+            <button
+              key={interestOption}
+              onClick={() => setInterest(interestOption)}
+              className={`block w-full rounded-xl p-4 text-left ${
+                interest === interestOption ? "bg-purple-600" : "bg-card"
+              }`}
+            >
+              {interestOption}
+            </button>
+          ))}
+        </>
+      )}
+      {step === 3 && (
+        <>
+          <h1 className="text-4xl font-bold mb-3">What is your level?</h1>
+
+          {levels.map((levelOption) => (
+            <button
+              key={levelOption}
+              onClick={() => setLevel(levelOption)}
+              className={`block w-full rounded-xl p-4 text-left ${
+                level === levelOption ? "bg-purple-600" : "bg-card"
+              }`}
+            >
+              {levelOption}
+            </button>
+          ))}
+        </>
+      )}
+      <button onClick={() => setStep(step + 1)}>Next</button>
+    </div>
+  );
 }
