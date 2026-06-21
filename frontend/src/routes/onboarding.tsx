@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
 
 const roles = ["Frontend Developer", "UI/UX Designer", "AI Engineer", "Mobile Developer"];
 const interests = ["Design", "Development", "AI", "Productivity"];
@@ -17,7 +18,26 @@ function OnboardingPage() {
   const [interest, setInterest] = useState("");
   const [level, setLevel] = useState("");
 
-  console.log(role);
+  const handleNext = async () => {
+    if (step < 3) {
+      setStep(step + 1);
+    } else {
+      await fetch("http://localhost:5000/api/profile", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: 1,
+          role,
+          interest,
+          level,
+        }),
+      });
+
+      console.log("Profile Saved");
+    }
+  };
   return (
     <div className="space-y-3 mt-8 p-10">
       <h1 className="text-4xl font-bold mb-3">What do you want to become?</h1>
@@ -76,7 +96,7 @@ function OnboardingPage() {
           ))}
         </>
       )}
-      <button onClick={() => setStep(step + 1)}>Next</button>
+      <button onClick={handleNext}>Next</button>
     </div>
   );
 }
