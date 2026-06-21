@@ -17,6 +17,7 @@ function OnboardingPage() {
   const [role, setRole] = useState("");
   const [interest, setInterest] = useState("");
   const [level, setLevel] = useState("");
+  const navigate = useNavigate();
 
   const handleNext = async () => {
     if (step < 3) {
@@ -33,6 +34,9 @@ function OnboardingPage() {
           interest,
           level,
         }),
+      });
+      navigate({
+        to: "/ai-tools",
       });
 
       console.log("Profile Saved");
