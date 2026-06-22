@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 
+
 const roles = ["Frontend Developer", "UI/UX Designer", "AI Engineer", "Mobile Developer"];
 const interests = ["Design", "Development", "AI", "Productivity"];
 
@@ -36,7 +37,7 @@ function OnboardingPage() {
         }),
       });
       navigate({
-        to: "/ai-tools",
+        to: "/discover",
       });
 
       console.log("Profile Saved");
