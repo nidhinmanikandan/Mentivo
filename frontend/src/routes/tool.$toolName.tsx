@@ -12,12 +12,15 @@ function ToolRoadmapPage() {
   const { toolName } = Route.useParams();
 
   const [roadmap, setRoadmap] = useState<any[]>([]);
+  const [completedSkills, setCompletedSkills] = useState<string[]>([]);
 
   useEffect(() => {
     api.getToolRoadmap(toolName).then((data) => {
       setRoadmap(data.roadmap);
     });
   }, [toolName]);
+  const progress =
+    roadmap.length > 0 ? Math.round((completedSkills.length / roadmap.length) * 100) : 0;
 
   return (
     <DashboardLayout>
@@ -36,11 +39,11 @@ function ToolRoadmapPage() {
           <div className="h-3 rounded-full bg-card-elevated overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-violet-500 to-pink-500"
-              style={{ width: "0%" }}
+              style={{ width: `${progress}%` }}
             />
           </div>
 
-          <p className="mt-2 text-sm text-muted-foreground">0% Completed</p>
+          <p className="mt-2 text-sm text-muted-foreground">{progress}% Completed</p>
         </div>
 
         {/* Roadmap Steps */}
@@ -50,10 +53,21 @@ function ToolRoadmapPage() {
           <div className="space-y-4">
             {roadmap.map((step, index) => (
               <div key={index} className="rounded-2xl bg-card p-5">
-                <div className="flex justify-between">
+                <div className="flex justify-between items-center">
                   <h3 className="font-semibold">{step.skill}</h3>
 
-                  <span className="text-sm text-muted-foreground">{step.duration}</span>
+                  <button
+                    onClick={() =>
+                      setCompletedSkills((prev) =>
+                        prev.includes(step.skill)
+                          ? prev.filter((s) => s !== step.skill)
+                          : [...prev, step.skill],
+                      )
+                    }
+                    className="text-xl"
+                  >
+                    {completedSkills.includes(step.skill) ? "✅" : "⬜"}
+                  </button>
                 </div>
 
                 <p className="mt-2 text-sm text-muted-foreground">{step.difficulty}</p>
