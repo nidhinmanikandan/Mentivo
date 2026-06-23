@@ -3,13 +3,31 @@ const router = express.Router();
 
 const users = require("../data/users");
 
-
-
 const {
   getUserProgress,
   addCompletedSkill,
   changeCareer,
 } = require("../services/progressTracker");
+
+const toolProgress = {};
+
+router.post("/", (req, res) => {
+  const { tool, completedSkills } = req.body;
+
+  toolProgress[tool] = completedSkills;
+
+  res.json({
+    success: true,
+  });
+});
+
+router.get("/tool/:toolName", (req, res) => {
+  const { toolName } = req.params;
+
+  res.json({
+    completedSkills: toolProgress[toolName] || [],
+  });
+});
 
 router.get("/:id", (req, res) => {
   const userId = Number(req.params.id);

@@ -18,6 +18,9 @@ const toolRoadmapRoute = require("./routes/toolRoadmap");
 const profileRoutes = require("./routes/profile");
 
 const userProfile = require("./data/userProfile");
+
+const progressData = require("./data/progressData");
+
 // Create the Express application instance
 const app = express();
 
@@ -39,6 +42,8 @@ app.use("/api/tools", toolsRoutes);
 app.use("/api/tool-roadmap", toolRoadmapRoute);
 
 app.use("/api/profile", profileRoutes);
+
+app.use("/api/progress", progressRoutes);
 
 // Start the server listening on port 5000
 app.listen(5000, () => {
@@ -67,4 +72,22 @@ app.get("/api/recommendations", (req, res) => {
   }
 
   res.json(tools);
+});
+
+app.post("/api/progress", (req, res) => {
+  const { tool, completedSkills } = req.body;
+
+  progressData[tool] = completedSkills;
+
+  res.json({
+    success: true,
+  });
+});
+
+app.get("/api/progress/:tool", (req, res) => {
+  const tool = req.params.tool;
+
+  res.json({
+    completedSkills: progressData[tool] || [],
+  });
 });
