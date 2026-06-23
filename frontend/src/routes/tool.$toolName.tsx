@@ -82,19 +82,39 @@ function ToolRoadmapPage() {
           <p className="mt-2 text-sm text-muted-foreground">{progress}% Completed</p>
         </div>
 
-        <div className="mb-10 rounded-2xl bg-card p-5">
-          <h2 className="text-lg font-semibold mb-3">AI Mentor</h2>
+        <div className="flex gap-8 mt-4">
+          <div>
+            <p className="text-2xl font-bold">{completedSkills.length}</p>
+
+            <p className="text-muted-foreground text-sm">Completed</p>
+          </div>
+
+          <div>
+            <p className="text-2xl font-bold">{roadmap.length}</p>
+
+            <p className="text-muted-foreground text-sm">Total Skills</p>
+          </div>
+        </div>
+
+        <div className="mb-10 rounded-3xl bg-card p-6 border border-border">
+          <p className="text-sm text-violet-400 font-medium mb-2">CURRENT FOCUS</p>
 
           {nextSkill ? (
             <>
-              <p className="font-medium">Next Skill: {nextSkill.skill}</p>
+              <h2 className="text-2xl font-bold">{nextSkill.skill}</h2>
 
-              <p className="mt-2 text-sm text-muted-foreground">
-                Focus on this before moving to the next topic.
+              <p className="text-muted-foreground mt-2">
+                Complete this topic before moving to the next one.
               </p>
+
+              <div className="mt-4 flex gap-4">
+                <span className="px-3 py-1 rounded-full bg-background">{nextSkill.difficulty}</span>
+
+                <span className="px-3 py-1 rounded-full bg-background">{nextSkill.duration}</span>
+              </div>
             </>
           ) : (
-            <p>🎉 Roadmap Completed!</p>
+            <h2 className="text-2xl font-bold">🎉 Roadmap Completed</h2>
           )}
         </div>
 
