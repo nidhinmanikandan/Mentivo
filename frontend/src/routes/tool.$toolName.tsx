@@ -13,6 +13,7 @@ function ToolRoadmapPage() {
 
   const [roadmap, setRoadmap] = useState<any[]>([]);
   const [completedSkills, setCompletedSkills] = useState<string[]>([]);
+  const [challenges, setChallenges] = useState<any[]>([]);
 
   const toggleSkill = async (skillName: string) => {
     let updatedSkills;
@@ -47,6 +48,11 @@ function ToolRoadmapPage() {
       .then((data) => {
         setCompletedSkills(data.completedSkills || []);
       });
+    fetch(`http://localhost:5000/api/challenge/${toolName}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setChallenges(data);
+      });
   }, [toolName]);
   const progress =
     roadmap.length > 0 ? Math.round((completedSkills.length / roadmap.length) * 100) : 0;
@@ -57,6 +63,10 @@ function ToolRoadmapPage() {
   console.log("Completed:", completedSkills);
   console.log("Progress:", progress);
   console.log("Next Skill:", nextSkill);
+
+  const unlockedChallenges = challenges.filter((challenge) =>
+    completedSkills.includes(challenge.afterSkill),
+  );
 
   return (
     <DashboardLayout>
@@ -121,6 +131,13 @@ function ToolRoadmapPage() {
         {/* Roadmap Steps */}
         <div>
           <h2 className="text-xl font-semibold mb-4">Roadmap Steps</h2>
+          {unlockedChallenges.length > 0 && (
+            <div className="mb-8 rounded-2xl bg-card p-5">
+              <h2 className="text-lg font-semibold mb-3">Project Challenge</h2>
+
+              <p className="font-medium">{unlockedChallenges[0].title}</p>
+            </div>
+          )}
 
           <div className="space-y-4">
             {roadmap.map((step, index) => (

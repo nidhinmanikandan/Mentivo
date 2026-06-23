@@ -21,6 +21,8 @@ const userProfile = require("./data/userProfile");
 
 const progressData = require("./data/progressData");
 
+const projectChallenges = require("./data/projectChallenges");
+
 // Create the Express application instance
 const app = express();
 
@@ -44,6 +46,8 @@ app.use("/api/tool-roadmap", toolRoadmapRoute);
 app.use("/api/profile", profileRoutes);
 
 app.use("/api/progress", progressRoutes);
+
+
 
 // Start the server listening on port 5000
 app.listen(5000, () => {
@@ -91,3 +95,14 @@ app.get("/api/progress/:tool", (req, res) => {
     completedSkills: progressData[tool] || [],
   });
 });
+
+app.get(
+  "/api/challenge/:tool",
+  (req, res) => {
+    const tool = req.params.tool;
+
+    res.json(
+      projectChallenges[tool] || []
+    );
+  }
+);
