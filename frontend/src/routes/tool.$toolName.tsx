@@ -14,10 +14,39 @@ function ToolRoadmapPage() {
   const [roadmap, setRoadmap] = useState<any[]>([]);
   const [completedSkills, setCompletedSkills] = useState<string[]>([]);
 
+  const toggleSkill = async (skillName: string) => {
+    let updatedSkills;
+
+    if (completedSkills.includes(skillName)) {
+      updatedSkills = completedSkills.filter((skill) => skill !== skillName);
+    } else {
+      updatedSkills = [...completedSkills, skillName];
+    }
+
+    setCompletedSkills(updatedSkills);
+
+    await fetch("http://localhost:5000/api/progress", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        tool: toolName,
+        completedSkills: updatedSkills,
+      }),
+    });
+  };
+
   useEffect(() => {
     api.getToolRoadmap(toolName).then((data) => {
       setRoadmap(data.roadmap);
     });
+
+    fetch(`http://localhost:5000/api/progress/tool/${toolName}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCompletedSkills(data.completedSkills || []);
+      });
   }, [toolName]);
   const progress =
     roadmap.length > 0 ? Math.round((completedSkills.length / roadmap.length) * 100) : 0;
@@ -79,16 +108,7 @@ function ToolRoadmapPage() {
                 <div className="flex justify-between items-center">
                   <h3 className="font-semibold">{step.skill}</h3>
 
-                  <button
-                    onClick={() =>
-                      setCompletedSkills((prev) =>
-                        prev.includes(step.skill)
-                          ? prev.filter((s) => s !== step.skill)
-                          : [...prev, step.skill],
-                      )
-                    }
-                    className="text-xl"
-                  >
+                  <button onClick={() => toggleSkill(step.skill)} className="text-xl">
                     {completedSkills.includes(step.skill) ? "✅" : "⬜"}
                   </button>
                 </div>
