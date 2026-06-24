@@ -29,6 +29,7 @@ const projectChallenges = require("./data/projectChallenges");
 
 const Progress = require("./models/Progress");
 
+const User = require("./models/User");
 // Create the Express application instance
 const app = express();
 
@@ -116,4 +117,14 @@ app.get("/test-save", async (req, res) => {
   });
 
   res.json(progress);
+});
+
+app.get("/test-user", async (req, res) => {
+  const user = await User.create({
+    name: "Nidhin",
+    email: "nidhin@example.com",
+    role: "Frontend Developer",
+  });
+
+  res.json(user);
 });

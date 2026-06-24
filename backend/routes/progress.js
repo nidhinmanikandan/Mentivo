@@ -1,32 +1,37 @@
 const Progress = require("../models/Progress");
+const User = require("../models/User");
 
 const express = require("express");
 const router = express.Router();
-
-const users = require("../data/users");
-
-const {
-  getUserProgress,
-  addCompletedSkill,
-  changeCareer,
-} = require("../services/progressTracker");
 
 router.post("/", async (req, res) => {
   try {
     const { tool, completedSkills } = req.body;
 
-    await Progress.findOneAndUpdate(
-      { tool },
-      { completedSkills },
-      { upsert: true, new: true },
+    const user = await User.findOne(); //Temporary
+
+    const progress = await Progress.findOneAndUpdate(
+      {
+        userId: user._id,
+        tool,
+      },
+      {
+        userId: user._id,
+        tool,
+        completedSkills,
+      },
+      {
+        upsert: true,
+        new: true,
+      },
     );
 
-    res.json({
-      success: true,
-    });
+    res.json(progress);
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
-      error: error.message,
+      error: "Failed to save progress",
     });
   }
 });
@@ -35,7 +40,10 @@ router.get("/tool/:toolName", async (req, res) => {
   try {
     const { toolName } = req.params;
 
+    const user = await User.findOne();
+
     const progress = await Progress.findOne({
+      userId: user._id,
       tool: toolName,
     });
 
@@ -43,8 +51,10 @@ router.get("/tool/:toolName", async (req, res) => {
       completedSkills: progress?.completedSkills || [],
     });
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
-      error: error.message,
+      error: "Failed to load progress",
     });
   }
 });
