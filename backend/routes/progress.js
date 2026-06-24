@@ -1,3 +1,5 @@
+const Progress = require("../models/Progress");
+
 const express = require("express");
 const router = express.Router();
 
@@ -9,24 +11,42 @@ const {
   changeCareer,
 } = require("../services/progressTracker");
 
-const toolProgress = {};
+router.post("/", async (req, res) => {
+  try {
+    const { tool, completedSkills } = req.body;
 
-router.post("/", (req, res) => {
-  const { tool, completedSkills } = req.body;
+    await Progress.findOneAndUpdate(
+      { tool },
+      { completedSkills },
+      { upsert: true, new: true },
+    );
 
-  toolProgress[tool] = completedSkills;
-
-  res.json({
-    success: true,
-  });
+    res.json({
+      success: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
 });
 
-router.get("/tool/:toolName", (req, res) => {
-  const { toolName } = req.params;
+router.get("/tool/:toolName", async (req, res) => {
+  try {
+    const { toolName } = req.params;
 
-  res.json({
-    completedSkills: toolProgress[toolName] || [],
-  });
+    const progress = await Progress.findOne({
+      tool: toolName,
+    });
+
+    res.json({
+      completedSkills: progress?.completedSkills || [],
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
 });
 
 router.get("/:id", (req, res) => {

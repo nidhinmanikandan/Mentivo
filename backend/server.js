@@ -1,3 +1,7 @@
+require("dotenv").config();
+
+const connectDB = require("./config/db"); // connect database
+
 // Import the Express web framework to create the server
 const express = require("express");
 
@@ -23,6 +27,8 @@ const progressData = require("./data/progressData");
 
 const projectChallenges = require("./data/projectChallenges");
 
+const Progress = require("./models/Progress");
+
 // Create the Express application instance
 const app = express();
 
@@ -47,7 +53,8 @@ app.use("/api/profile", profileRoutes);
 
 app.use("/api/progress", progressRoutes);
 
-
+//connect database
+connectDB();
 
 // Start the server listening on port 5000
 app.listen(5000, () => {
@@ -96,13 +103,17 @@ app.get("/api/progress/:tool", (req, res) => {
   });
 });
 
-app.get(
-  "/api/challenge/:tool",
-  (req, res) => {
-    const tool = req.params.tool;
+app.get("/api/challenge/:tool", (req, res) => {
+  const tool = req.params.tool;
 
-    res.json(
-      projectChallenges[tool] || []
-    );
-  }
-);
+  res.json(projectChallenges[tool] || []);
+});
+
+app.get("/test-save", async (req, res) => {
+  const progress = await Progress.create({
+    tool: "Framer",
+    completedSkills: ["Framer Basics"],
+  });
+
+  res.json(progress);
+});
