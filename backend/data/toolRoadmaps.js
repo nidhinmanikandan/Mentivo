@@ -1,120 +1,127 @@
 const toolRoadmaps = {
-  Framer: [
-    {
-      skill: "Framer Basics",
-      difficulty: "Beginner",
-      duration: "2 days",
-    },
-    {
-      skill: "Layouts & Sections",
-      difficulty: "Beginner",
-      duration: "3 days",
-    },
-    {
-      skill: "Components",
-      difficulty: "Intermediate",
-      duration: "4 days",
-    },
-    {
-      skill: "CMS",
-      difficulty: "Intermediate",
-      duration: "3 days",
-    },
-    {
-      skill: "Animations",
-      difficulty: "Intermediate",
-      duration: "4 days",
-    },
-    {
-      skill: "Publishing",
-      difficulty: "Beginner",
-      duration: "1 day",
-    },
-  ],
+  Framer: {
+    overview: {
+      title: "Framer",
 
-  Cursor: [
-    {
-      skill: "Cursor Setup",
-      difficulty: "Beginner",
-      duration: "1 day",
-    },
-    {
-      skill: "AI Chat",
-      difficulty: "Beginner",
-      duration: "2 days",
-    },
-    {
-      skill: "Code Generation",
-      difficulty: "Intermediate",
-      duration: "3 days",
-    },
-    {
-      skill: "Agent Mode",
-      difficulty: "Advanced",
-      duration: "5 days",
-    },
-    {
-      skill: "Multi-file Refactoring",
-      difficulty: "Advanced",
-      duration: "4 days",
-    },
-  ],
+      category: "Website Builder",
 
-  Figma: [
-    {
-      skill: "Figma Interface",
-      difficulty: "Beginner",
-      duration: "2 days",
-    },
-    {
-      skill: "Frames & Auto Layout",
-      difficulty: "Intermediate",
-      duration: "4 days",
-    },
-    {
-      skill: "Components",
-      difficulty: "Intermediate",
-      duration: "3 days",
-    },
-    {
-      skill: "Design Systems",
-      difficulty: "Advanced",
-      duration: "5 days",
-    },
-    {
-      skill: "Prototyping",
-      difficulty: "Intermediate",
-      duration: "3 days",
-    },
-  ],
+      tagline: "Design and publish responsive websites visually.",
 
-  React: [
-    {
-      skill: "JSX",
-      difficulty: "Beginner",
-      duration: "2 days",
-    },
-    {
-      skill: "Components",
-      difficulty: "Beginner",
-      duration: "3 days",
-    },
-    {
-      skill: "State Management",
+      description:
+        "Framer is a visual website builder that allows designers and developers to create interactive, responsive websites without writing much code.",
+
       difficulty: "Intermediate",
-      duration: "4 days",
+
+      estimatedTime: "2–3 Weeks",
+
+      bestFor: ["Frontend Developers", "UI Designers", "Freelancers"],
+
+      prerequisites: ["Basic UI Design", "Responsive Design"],
+
+      useCases: [
+        "Portfolio Websites",
+        "Landing Pages",
+        "Marketing Sites",
+        "Interactive Prototypes",
+      ],
     },
-    {
-      skill: "Hooks",
-      difficulty: "Intermediate",
-      duration: "4 days",
-    },
-    {
-      skill: "Routing",
-      difficulty: "Intermediate",
-      duration: "3 days",
-    },
-  ],
+
+    journey: [
+      {
+        id: "workspace",
+
+        title: "Workspace",
+
+        description:
+          "Understand the Framer workspace before building anything.",
+
+        duration: "20 min",
+
+        children: [
+          {
+            title: "Pages",
+
+            description: "Learn how pages organize your website.",
+
+            steps: ["Create a page", "Rename page", "Navigate between pages"],
+          },
+
+          {
+            title: "Layers",
+
+            description: "Understand how layers organize your design.",
+          },
+
+          {
+            title: "Assets",
+
+            description: "Manage images, icons and reusable assets.",
+          },
+        ],
+      },
+
+      {
+        id: "components",
+
+        title: "Components",
+
+        description: "Learn reusable UI.",
+
+        duration: "2 hours",
+
+        children: [
+          {
+            title: "Create Component",
+
+            steps: [
+              "Select Frame",
+              "Create Component",
+              "Rename",
+              "Reuse Instance",
+            ],
+          },
+
+          {
+            title: "Variants",
+          },
+
+          {
+            title: "Properties",
+          },
+        ],
+      },
+
+      {
+        id: "cms",
+
+        title: "CMS",
+
+        children: [
+          {
+            title: "Collections",
+          },
+
+          {
+            title: "Fields",
+          },
+
+          {
+            title: "Dynamic Pages",
+          },
+        ],
+      },
+    ],
+
+    resources: [
+      {
+        title: "Official Documentation",
+        url: "https://www.framer.com/docs/",
+      },
+
+      {
+        title: "Framer YouTube Channel",
+        url: "...",
+      },
+    ],
+  },
 };
-
-module.exports = toolRoadmaps;
