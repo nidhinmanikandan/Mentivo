@@ -104,6 +104,28 @@ function ToolRoadmapPage() {
 
                 <p className="font-semibold">{toolData.overview.estimatedTime}</p>
               </div>
+              <div className="mt-6">
+                <p className="text-xs text-muted-foreground mb-2">Best For</p>
+
+                <div className="flex flex-wrap gap-2">
+                  {toolData.overview.bestFor.map((item: string) => (
+                    <span key={item} className="px-3 py-1 rounded-full bg-background text-sm">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-6">
+                <p className="text-xs text-muted-foreground mb-2">Use Cases</p>
+
+                <div className="flex flex-wrap gap-2">
+                  {toolData.overview.useCases.map((item: string) => (
+                    <span key={item} className="px-3 py-1 rounded-full bg-background text-sm">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         )}
