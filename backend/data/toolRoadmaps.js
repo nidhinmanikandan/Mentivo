@@ -125,3 +125,5 @@ const toolRoadmaps = {
     ],
   },
 };
+
+module.exports = toolRoadmaps;

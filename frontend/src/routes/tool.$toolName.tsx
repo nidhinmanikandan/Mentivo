@@ -11,7 +11,7 @@ export const Route = createFileRoute("/tool/$toolName")({
 function ToolRoadmapPage() {
   const { toolName } = Route.useParams();
 
-  const [roadmap, setRoadmap] = useState<any[]>([]);
+  const [toolData, setToolData] = useState<any | null>(null);
   const [completedSkills, setCompletedSkills] = useState<string[]>([]);
   const [challenges, setChallenges] = useState<any[]>([]);
 
@@ -40,7 +40,7 @@ function ToolRoadmapPage() {
 
   useEffect(() => {
     api.getToolRoadmap(toolName).then((data) => {
-      setRoadmap(data.roadmap);
+      setToolData(data);
     });
 
     fetch(`http://localhost:5000/api/progress/tool/${toolName}`)
@@ -54,15 +54,16 @@ function ToolRoadmapPage() {
         setChallenges(data);
       });
   }, [toolName]);
-  const progress =
-    roadmap.length > 0 ? Math.round((completedSkills.length / roadmap.length) * 100) : 0;
+  const totalNodes = toolData?.journey?.length ?? 0;
 
-  const nextSkill = roadmap.find((step) => !completedSkills.includes(step.skill));
+  const progress = totalNodes > 0 ? Math.round((completedSkills.length / totalNodes) * 100) : 0;
 
-  console.log("Roadmap:", roadmap);
+  //const nextSkill = roadmap.find((step) => !completedSkills.includes(step.skill));
+
+  console.log("Tool:", toolData);
   console.log("Completed:", completedSkills);
   console.log("Progress:", progress);
-  console.log("Next Skill:", nextSkill);
+  //console.log("Next Skill:", nextSkill);
 
   const unlockedChallenges = challenges.filter((challenge) =>
     completedSkills.includes(challenge.afterSkill),
@@ -77,6 +78,35 @@ function ToolRoadmapPage() {
 
           <p className="mt-3 text-lg text-muted-foreground">Master {toolName} step by step.</p>
         </div>
+
+        {/* Overview */}
+        {toolData && (
+          <div className="mb-8 rounded-2xl bg-card p-6 border border-border">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-violet-400">{toolData.overview.category}</p>
+
+                <h2 className="text-3xl font-bold mt-1">{toolData.overview.title}</h2>
+
+                <p className="mt-3 text-muted-foreground">{toolData.overview.description}</p>
+              </div>
+            </div>
+
+            <div className="flex gap-6 mt-6 flex-wrap">
+              <div>
+                <p className="text-xs text-muted-foreground">Difficulty</p>
+
+                <p className="font-semibold">{toolData.overview.difficulty}</p>
+              </div>
+
+              <div>
+                <p className="text-xs text-muted-foreground">Estimated Time</p>
+
+                <p className="font-semibold">{toolData.overview.estimatedTime}</p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Progress */}
         <div className="mb-10">
@@ -100,13 +130,13 @@ function ToolRoadmapPage() {
           </div>
 
           <div>
-            <p className="text-2xl font-bold">{roadmap.length}</p>
+            <p className="text-2xl font-bold">{toolData?.journey?.length ?? 0}</p>
 
             <p className="text-muted-foreground text-sm">Total Skills</p>
           </div>
         </div>
 
-        <div className="mb-10 rounded-3xl bg-card p-6 border border-border">
+        {/* <div className="mb-10 rounded-3xl bg-card p-6 border border-border">
           <p className="text-sm text-violet-400 font-medium mb-2">CURRENT FOCUS</p>
 
           {nextSkill ? (
@@ -126,7 +156,7 @@ function ToolRoadmapPage() {
           ) : (
             <h2 className="text-2xl font-bold">🎉 Roadmap Completed</h2>
           )}
-        </div>
+        </div> */}
 
         {/* Roadmap Steps */}
         <div>
@@ -140,17 +170,17 @@ function ToolRoadmapPage() {
           )}
 
           <div className="space-y-4">
-            {roadmap.map((step, index) => (
+            {toolData?.journey?.map((step, index) => (
               <div key={index} className="rounded-2xl bg-card p-5">
                 <div className="flex justify-between items-center">
-                  <h3 className="font-semibold">{step.skill}</h3>
+                  <h3 className="font-semibold">{step.title}</h3>
 
-                  <button onClick={() => toggleSkill(step.skill)} className="text-xl">
-                    {completedSkills.includes(step.skill) ? "✅" : "⬜"}
+                  <button onClick={() => toggleSkill(step.title)} className="text-xl">
+                    {completedSkills.includes(step.title) ? "✅" : "⬜"}
                   </button>
                 </div>
 
-                <p className="mt-2 text-sm text-muted-foreground">{step.difficulty}</p>
+                <p className="mt-2 text-sm text-muted-foreground">{step.description}</p>
               </div>
             ))}
           </div>
