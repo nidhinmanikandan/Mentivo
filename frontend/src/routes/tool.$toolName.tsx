@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
+import ToolTree from "@/components/ToolTree";
 
 import { api } from "@/services/api";
 
@@ -190,7 +191,7 @@ function ToolRoadmapPage() {
         </div> */}
 
         {/* Roadmap Steps */}
-        <div>
+        {/* <div>
           <h2 className="text-xl font-semibold mb-4">Roadmap Steps</h2>
           {unlockedChallenges.length > 0 && (
             <div className="mb-8 rounded-2xl bg-card p-5">
@@ -242,6 +243,13 @@ function ToolRoadmapPage() {
               </div>
             ))}
           </div>
+        </div> */}
+        {/* Knowledge Map */}
+
+        <div className="mt-10">
+          <h2 className="text-xl font-semibold mb-4">Knowledge Map</h2>
+
+          <ToolTree tool={toolData} />
         </div>
       </div>
     </DashboardLayout>
