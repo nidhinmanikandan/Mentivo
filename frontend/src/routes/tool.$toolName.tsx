@@ -14,6 +14,7 @@ function ToolRoadmapPage() {
   const [toolData, setToolData] = useState<any | null>(null);
   const [completedSkills, setCompletedSkills] = useState<string[]>([]);
   const [challenges, setChallenges] = useState<any[]>([]);
+  const [expandedNode, setExpandedNode] = useState<string | null>(null);
 
   const toggleSkill = async (skillName: string) => {
     let updatedSkills;
@@ -36,6 +37,14 @@ function ToolRoadmapPage() {
         completedSkills: updatedSkills,
       }),
     });
+  };
+
+  const toggleNode = (id: string) => {
+    if (expandedNode === id) {
+      setExpandedNode(null);
+    } else {
+      setExpandedNode(id);
+    }
   };
 
   useEffect(() => {
@@ -76,7 +85,7 @@ function ToolRoadmapPage() {
         <div className="mb-10">
           <h1 className="text-5xl font-bold text-foreground">{toolName} Learning Roadmap</h1>
 
-          <p className="mt-3 text-lg text-muted-foreground">Master {toolName} step by step.</p>
+          <p className="mt-3 text-lg text-muted-foreground">{toolData?.overview.tagline}</p>
         </div>
 
         {/* Overview */}
@@ -192,17 +201,44 @@ function ToolRoadmapPage() {
           )}
 
           <div className="space-y-4">
-            {toolData?.journey?.map((step, index) => (
-              <div key={index} className="rounded-2xl bg-card p-5">
+            {toolData?.journey?.map((step: any, index: number) => (
+              <div
+                key={index}
+                onClick={() => toggleNode(step.id)}
+                className="rounded-2xl bg-card p-5 cursor-pointer"
+              >
                 <div className="flex justify-between items-center">
-                  <h3 className="font-semibold">{step.title}</h3>
+                  <div className="flex items-center gap-3">
+                    <span>{expandedNode === step.id ? "▼" : "▶"}</span>
 
-                  <button onClick={() => toggleSkill(step.title)} className="text-xl">
+                    <h3 className="font-semibold">{step.title}</h3>
+                  </div>
+
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleSkill(step.title);
+                    }}
+                    className="text-xl"
+                  >
                     {completedSkills.includes(step.title) ? "✅" : "⬜"}
                   </button>
                 </div>
 
                 <p className="mt-2 text-sm text-muted-foreground">{step.description}</p>
+                {expandedNode === step.id && step.children && (
+                  <div className="mt-5 ml-6 space-y-3">
+                    {step.children.map((child: any, childIndex: number) => (
+                      <div key={childIndex} className="rounded-xl bg-background p-4">
+                        <p className="font-medium">{child.title}</p>
+
+                        {child.description && (
+                          <p className="text-sm text-muted-foreground mt-1">{child.description}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
