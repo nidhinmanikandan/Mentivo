@@ -1,5 +1,4 @@
 import RoadmapNode from "./RoadmapNode";
-import Connector from "./Connector";
 
 type Props = {
   tool: any;
@@ -9,54 +8,68 @@ export default function ToolTree({ tool }: Props) {
   if (!tool) return null;
 
   return (
-    <div className="py-10">
+    <div className="relative pl-40 py-10">
+      {/* Main Timeline */}
+      <div className="absolute left-20 top-10 bottom-10 w-[2px] bg-[#7BBEFF]" />
+
       {/* Root */}
-      <div className="flex items-start">
-        {/* Left Spine */}
-        <div className="relative w-20 flex justify-center">
-          <div className="absolute top-14 bottom-0 w-[2px] bg-[#7BBEFF]" />
-        </div>
+      <div className="relative mb-28">
+        <RoadmapNode title={tool.overview.title} />
 
-        {/* Content */}
-        <div className="flex-1 space-y-24">
-          <RoadmapNode title={tool.overview.title} />
-
-          {tool.journey.map((section: any, sectionIndex: number) => (
-            <div key={section.id} className="flex items-start gap-12">
-              {/* Connector */}
-              <div className="relative w-20 flex justify-center">
-                {/* Dot */}
-                <div className="absolute top-5 w-4 h-4 rounded-full bg-[#7BBEFF]" />
-
-                {/* Horizontal Line */}
-                <div className="absolute top-7 left-10 w-10 h-[2px] bg-[#7BBEFF]" />
-              </div>
-
-              {/* Section + Children */}
-              <div className="space-y-8">
-                <RoadmapNode title={section.title} />
-
-                <div className="relative ml-20 mt-8">
-                  {/* Vertical Line */}
-                  <div className="absolute left-2 top-0 bottom-0 w-[2px] bg-[#7BBEFF]" />
-
-                  {section.children?.map((child: any, index: number) => (
-                    <div key={index} className="relative flex items-center gap-5 mb-8">
-                      {/* Dot */}
-                      <div className="absolute left-0 w-4 h-4 rounded-full bg-[#7BBEFF]" />
-
-                      {/* Horizontal Line */}
-                      <div className="ml-4 w-10 h-[2px] bg-[#7BBEFF]" />
-
-                      <RoadmapNode title={child.title} small />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <div className="absolute left-[-88px] top-1/2 h-[2px] w-[88px] bg-[#7BBEFF]" />
       </div>
+
+      {/* Sections */}
+      <div className="space-y-32">
+        {tool.journey.map((section: any) => (
+          <Section key={section.id} section={section} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Section({ section }: { section: any }) {
+  return (
+    <div className="relative">
+      {/* Timeline Dot */}
+      <div className="absolute left-[-72px] top-8 h-5 w-5 rounded-full bg-[#7BBEFF]" />
+
+      {/* Horizontal */}
+      <div className="absolute left-[-52px] top-10 h-[2px] w-[52px] bg-[#7BBEFF]" />
+
+      {/* Parent */}
+      <div className="relative inline-block">
+        <RoadmapNode title={section.title} />
+
+        {section.children?.length > 0 && (
+          <div
+            className="absolute left-1/2 top-full w-[2px] bg-[#7BBEFF]"
+            style={{
+              height: `${section.children.length * 78}px`,
+            }}
+          />
+        )}
+      </div>
+
+      {/* Children */}
+      <div className="mt-12 ml-56 space-y-8">
+        {section.children?.map((child: any) => (
+          <Child key={child.title} child={child} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function Child({ child }: { child: any }) {
+  return (
+    <div className="relative flex items-center">
+      <div className="absolute left-[-56px] h-5 w-5 rounded-full bg-[#7BBEFF]" />
+
+      <div className="absolute left-[-36px] h-[2px] w-[36px] bg-[#7BBEFF]" />
+
+      <RoadmapNode title={child.title} small />
     </div>
   );
 }

@@ -7,14 +7,18 @@ export default function RoadmapNode({ title, small }: Props) {
   return (
     <div
       className={`
-        inline-flex items-center justify-center
-        rounded-full
-        bg-[#BFE0FF]
-        text-black
-        font-medium
-        shadow-lg
-        ${small ? "px-5 py-2 text-sm" : "px-8 py-3 text-base"}
-      `}
+rounded-full
+bg-[#B9DAFF]
+text-black
+font-medium
+flex
+items-center
+justify-center
+shadow-lg
+transition-all
+duration-300
+${small ? "w-44 h-14 text-lg" : "w-60 h-16 text-2xl"}
+`}
     >
       {title}
     </div>
