@@ -30,6 +30,9 @@ const projectChallenges = require("./data/projectChallenges");
 const Progress = require("./models/Progress");
 
 const User = require("./models/User");
+
+const recommendationRoutes = require("./routes/recommendations");
+
 // Create the Express application instance
 const app = express();
 
@@ -53,6 +56,8 @@ app.use("/api/tool-roadmap", toolRoadmapRoute);
 app.use("/api/profile", profileRoutes);
 
 app.use("/api/progress", progressRoutes);
+
+app.use("/api/recommendations", recommendationRoutes);
 
 //connect database
 connectDB();

@@ -80,6 +80,14 @@ function ToolRoadmapPage() {
     completedSkills.includes(challenge.afterSkill),
   );
 
+  if (!toolData) {
+    return (
+      <DashboardLayout>
+        <div className="p-10">Loading...</div>
+      </DashboardLayout>
+    );
+  }
+
   return (
     <DashboardLayout>
       <div className="max-w-6xl mx-auto">
@@ -250,8 +258,8 @@ function ToolRoadmapPage() {
         <div className="mt-10">
           <h2 className="text-xl font-semibold mb-4">Knowledge Map</h2>
 
-          <ToolTree tool={toolData} />
-          <ToolResources resources={toolData.resources} />
+          {toolData && <ToolTree tool={toolData} />}
+          <ToolResources resources={toolData?.resources ?? []} />
         </div>
       </div>
     </DashboardLayout>

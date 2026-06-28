@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
+import { ToolCard } from "@/components/dashboard/ToolCard";
 
 export const Route = createFileRoute("/discover")({
   component: DiscoverPage,
@@ -25,21 +26,8 @@ function DiscoverPage() {
       <p className="text-muted-foreground mb-8">Based on your learning profile.</p>
 
       <div className="space-y-4">
-        {tools.map((tool) => (
-          <div
-            key={tool}
-            onClick={() =>
-              navigate({
-                to: "/tool/$toolName",
-                params: {
-                  toolName: tool,
-                },
-              })
-            }
-            className="rounded-2xl bg-card p-5 border border-white/5 cursor-pointer hover:border-purple-500 transition"
-          >
-            <h2 className="text-xl font-semibold">{tool}</h2>
-          </div>
+        {tools.map((tool: any) => (
+          <ToolCard key={tool.name} tool={tool} />
         ))}
       </div>
     </div>

@@ -1,23 +1,23 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-
-  email: {
-    type: String,
+  userId: {
+    type: Number,
     required: true,
     unique: true,
   },
 
   role: {
     type: String,
-    default: "Frontend Developer",
+    default: "",
   },
 
-  targetRole: {
+  interest: {
+    type: String,
+    default: "",
+  },
+
+  level: {
     type: String,
     default: "",
   },

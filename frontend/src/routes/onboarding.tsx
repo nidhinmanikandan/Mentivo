@@ -20,6 +20,7 @@ function OnboardingPage() {
   const [level, setLevel] = useState("");
   const navigate = useNavigate();
 
+  console.log("Next clicked");
   const handleNext = async () => {
     if (step < 3) {
       setStep(step + 1);
@@ -37,7 +38,7 @@ function OnboardingPage() {
         }),
       });
       navigate({
-        to: "/discover",
+        to: "/",
       });
 
       console.log("Profile Saved");
@@ -50,9 +51,6 @@ function OnboardingPage() {
       <p className="text-muted-foreground mb-8">We'll personalize your learning journey.</p>
       {step === 1 && (
         <>
-          <h1 className="text-4xl font-bold mb-3">What do you want to become?</h1>
-
-          <p className="text-muted-foreground mb-8">We'll personalize your learning journey.</p>
 
           {roles.map((roleOption) => (
             <button
@@ -101,6 +99,7 @@ function OnboardingPage() {
           ))}
         </>
       )}
+      
       <button onClick={handleNext}>Next</button>
     </div>
   );

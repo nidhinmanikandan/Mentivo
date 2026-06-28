@@ -1,164 +1,65 @@
 const careers = {
   "Frontend Developer": [
     {
-      skill: "HTML",
-      difficulty: "Beginner",
-      duration: "1 week",
-      priority: 1,
-      resources: [
-        {
-          title: "HTML Crash Course",
-          url: "https://www.youtube.com/watch?v=UB1O30fR-EE",
-        },
-      ],
-    },
-
-    {
-      skill: "CSS",
-      difficulty: "Beginner",
-      duration: "2 weeks",
-      priority: 3,
-      resources: [
-        {
-          title: "CSS Crash Course",
-          url: "https://www.youtube.com/watch?v=yfoY53QXEnI",
-        },
-      ],
-    },
-
-    {
-      skill: "React",
+      tool: "Framer",
       difficulty: "Intermediate",
-      duration: "4 weeks",
-      priority: 2,
+      duration: "2–3 Weeks",
+      priority: 1,
+      roadmap: "/tool/Framer",
+      why: "Learn to design and publish responsive websites visually.",
       resources: [
         {
-          title: "React Tutorial for Beginners",
-          url: "https://www.youtube.com/watch?v=Ke90Tje7VS0",
-        },
-        {
-          title: "Official React Documentation",
-          url: "https://react.dev",
-        },
-        {
-          title: "React Roadmap",
-          url: "https://roadmap.sh/react",
+          title: "Framer Documentation",
+          url: "https://www.framer.com/docs/",
         },
       ],
-      why: "Wireframing helps designers plan layouts and user flows before creating high-fidelity designs.",
+    },
+
+    {
+      tool: "Cursor",
+      difficulty: "Beginner",
+      duration: "1–2 Weeks",
+      priority: 2,
+      roadmap: "/tool/Cursor",
+      why: "Use AI to write, edit and understand code much faster.",
+      resources: [
+        {
+          title: "Cursor Documentation",
+          url: "https://cursor.com/docs",
+        },
+      ],
     },
   ],
 
   "UI/UX Designer": [
     {
-      skill: "Wireframing",
-      difficulty: "Beginner",
-      duration: "1 week",
+      tool: "Framer",
+      difficulty: "Intermediate",
+      duration: "2–3 Weeks",
       priority: 1,
+      roadmap: "/tool/Framer",
+      why: "Design interactive websites and prototypes visually.",
       resources: [
         {
-          title: "Wireframing Basics",
-          url: "https://www.youtube.com/watch?v=3j8s9Xo5n6A",
-        },
-      ],
-      why: "Wireframing helps designers quickly validate ideas before building.",
-    },
-    {
-      skill: "Figma",
-      difficulty: "Intermediate",
-      duration: "3 weeks",
-      priority: 2,
-      resources: [
-        {
-          title: "Figma Tutorial for Beginners",
-          url: "https://www.youtube.com/watch?v=FTFaQWZBqQ8",
-        },
-      ],
-    },
-    {
-      skill: "Design Systems",
-      difficulty: "Advanced",
-      duration: "4 weeks",
-      priority: 3,
-      resources: [
-        {
-          title: "Design Systems Explained",
-          url: "https://www.youtube.com/watch?v=HqjYl2r9XoQ",
-        },
-      ],
-    },
-    {
-      skill: "Prototyping",
-      difficulty: "Intermediate",
-      duration: "2 weeks",
-      priority: 4,
-      resources: [
-        {
-          title: "Prototyping with Figma",
-          url: "https://www.youtube.com/watch?v=FTFaQWZBqQ8&t=10s",
-        },
-      ],
-    },
-    {
-      skill: "UX Research",
-      difficulty: "Advanced",
-      duration: "4 weeks",
-      priority: 5,
-      resources: [
-        {
-          title: "UX Research Methods",
-          url: "https://www.youtube.com/watch?v=OeX9nqj8s5A",
+          title: "Framer Documentation",
+          url: "https://www.framer.com/docs/",
         },
       ],
     },
   ],
 
-  "Mobile Developer": [
+  "AI Developer": [
     {
-      skill: "Flutter",
-      difficulty: "Intermediate",
-      duration: "4 weeks",
-      priority: 1,
-      resources: [
-        {
-          title: "Flutter Tutorial for Beginners",
-          url: "https://www.youtube.com/watch?v=1gDhl4leEzA",
-        },
-      ],
-    },
-    {
-      skill: "Dart",
+      tool: "Cursor",
       difficulty: "Beginner",
-      duration: "2 weeks",
-      priority: 2,
+      duration: "1–2 Weeks",
+      priority: 1,
+      roadmap: "/tool/Cursor",
+      why: "Speed up AI-assisted development using Cursor.",
       resources: [
         {
-          title: "Dart Programming Language",
-          url: "https://www.youtube.com/watch?v=Ej_Pcr4uC2Q",
-        },
-      ],
-    },
-    {
-      skill: "Firebase",
-      difficulty: "Intermediate",
-      duration: "3 weeks",
-      priority: 3,
-      resources: [
-        {
-          title: "Firebase Tutorial for Beginners",
-          url: "https://www.youtube.com/watch?v=9kRgVxULbag",
-        },
-      ],
-    },
-    {
-      skill: "State Management",
-      difficulty: "Advanced",
-      duration: "4 weeks",
-      priority: 4,
-      resources: [
-        {
-          title: "Flutter State Management",
-          url: "https://www.youtube.com/watch?v=Zbm3hjPjQMk",
+          title: "Cursor Documentation",
+          url: "https://cursor.com/docs",
         },
       ],
     },
