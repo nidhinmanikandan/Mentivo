@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import ToolTree from "@/components/ToolTree";
+import ToolResources from "@/components/ToolResources";
 
 import { api } from "@/services/api";
 
@@ -250,6 +251,7 @@ function ToolRoadmapPage() {
           <h2 className="text-xl font-semibold mb-4">Knowledge Map</h2>
 
           <ToolTree tool={toolData} />
+          <ToolResources resources={toolData.resources} />
         </div>
       </div>
     </DashboardLayout>
