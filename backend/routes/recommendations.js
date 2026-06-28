@@ -1,24 +1,23 @@
 const express = require("express");
+
 const router = express.Router();
 
-const User = require("../models/User");
-const tools = require("../data/tools");
+const recommendTools = require("../services/aiRecommendation");
+
+const { getProfile } = require("../services/profileService");
 
 router.get("/", async (req, res) => {
   try {
-    const profile = await User.findOne({ userId: 1 });
+    const profile = getProfile();
 
-    if (!profile) {
-      return res.json([]);
-    }
+    const tools = await recommendTools(profile);
 
-    const recommendations = tools[profile.role] || [];
-
-    res.json(recommendations);
+    res.json(tools);
   } catch (err) {
-    console.error(err);
+    console.log(err);
+
     res.status(500).json({
-      message: "Server Error",
+      error: "AI recommendation failed",
     });
   }
 });
