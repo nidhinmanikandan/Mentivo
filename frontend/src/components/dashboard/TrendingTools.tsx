@@ -9,21 +9,17 @@ export function TrendingTools({ tools }: { tools: AiTool[] }) {
   const navigate = useNavigate();
 
   return (
-    <SectionCard
-      title="Trending AI Tools"
-      action="View all"
-      actionArrow
-    >
+    <SectionCard title="Trending AI Tools" action="View all" actionArrow>
       <div className="flex flex-col gap-3">
         {tools.map((tool) => (
           <ToolCard
-            key={tool.id}
+            key={tool.name}
             tool={tool}
             onClick={() =>
               navigate({
                 to: "/tool/$toolName",
                 params: {
-                  toolName: tool.name.replace(" AI", ""),
+                  toolName: tool.name,
                 },
               })
             }

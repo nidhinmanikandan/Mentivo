@@ -15,15 +15,18 @@ export function AiToolsPage() {
   const [tools, setTools] = useState<AiTool[]>([]);
 
   useEffect(() => {
-    api.getTrendingTools().then(setTools);
+    fetch("http://localhost:5000/api/recommendations")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setTools(data);
+      });
   }, []);
 
   return (
     <DashboardLayout>
       <section className="mb-8">
-        <h1 className="text-3xl font-bold text-foreground">
-          Discover AI Tools
-        </h1>
+        <h1 className="text-3xl font-bold text-foreground">Discover AI Tools</h1>
 
         <p className="mt-2 text-sm text-muted-foreground">
           Explore trending tools and generate learning roadmaps for them.

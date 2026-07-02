@@ -8,35 +8,48 @@ async function recommendTools(profile) {
   });
 
   const prompt = `
-You are an AI career mentor.
+You are an expert AI career mentor.
 
 User Profile:
-Role: ${profile.role}
-Interest: ${profile.interest}
-Level: ${profile.level}
+- Role: ${profile.role}
+- Interest: ${profile.interest}
+- Level: ${profile.level}
 
-Recommend exactly 8 modern tools.
+Recommend exactly 8 modern tools that are most useful for this user.
 
-Return ONLY JSON.
+Rules:
+- Mix beginner and advanced tools.
+- Prioritize currently popular tools.
+- Description must be VERY SHORT (maximum 4 words).
+- officialUrl must be the official website.
+- logoDomain should only contain the domain name (no https://).
+- Return ONLY valid JSON.
+- No markdown.
+- No explanations.
+
+Example:
 
 [
- {
-   "name":"",
-   "category":"",
-   "description":"",
-   "officialUrl":"",
-   "isTrending":true
- }
+  {
+    "name":"Cursor",
+    "category":"AI Code Editor",
+    "description":"AI coding assistant",
+    "officialUrl":"https://cursor.com",
+    "logoDomain":"cursor.com",
+    "isTrending":true
+  }
 ]
 `;
 
   const result = await model.generateContent(prompt);
 
-  const text = result.response.text();
+  const text = result.response
+    .text()
+    .replace(/```json/g, "")
+    .replace(/```/g, "")
+    .trim();
 
-  return JSON.parse(
-    text.replace(/```json/g, "").replace(/```/g, "")
-  );
+  return JSON.parse(text);
 }
 
 module.exports = recommendTools;

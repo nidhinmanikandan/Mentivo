@@ -4,7 +4,9 @@ const router = express.Router();
 
 const recommendTools = require("../services/aiRecommendation");
 
-const { getProfile } = require("../services/profileService");
+const User = require("../models/User");
+
+const profile = await User.findOne({ userId: 1 });
 
 router.get("/", async (req, res) => {
   try {

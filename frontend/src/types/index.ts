@@ -1,14 +1,18 @@
 export interface AiTool {
-  id: string;
   name: string;
   category: string;
   description: string;
-  popularity: string;
-  tag: string;
-  logoBg: string;
-  logoText: string;
-}
+  officialUrl: string;
+  logoDomain: string;
+  isTrending?: boolean;
 
+  // Optional UI fields (for old data)
+  id?: string;
+  popularity?: string;
+  tag?: string;
+  logoBg?: string;
+  logoText?: string;
+}
 export interface RoadmapItem {
   id: string;
   step: number;

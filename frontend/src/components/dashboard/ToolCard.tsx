@@ -16,10 +16,12 @@ export function ToolCard({ tool, onClick }: ToolCardProps) {
       className="rounded-2xl bg-card-elevated p-4 hover:bg-accent transition cursor-pointer group"
     >
       <div className="flex items-start gap-3">
-        <div
-          className={`h-11 w-11 rounded-xl bg-gradient-to-br ${tool.logoBg} grid place-items-center text-white text-base font-bold shadow-md`}
-        >
-          {tool.logoText}
+        <div className="h-11 w-11 rounded-xl bg-card flex items-center justify-center">
+          <img
+            src={`https://www.google.com/s2/favicons?sz=128&domain=${tool.logoDomain}`}
+            alt={tool.name}
+            className="w-8 h-8 rounded-md"
+          />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
