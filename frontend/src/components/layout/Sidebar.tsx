@@ -11,6 +11,8 @@ import {
   Sparkles,
 } from "lucide-react";
 
+
+
 type NavEntry = { label: string; icon: React.ElementType; to?: string };
 
 const mainNav = [
