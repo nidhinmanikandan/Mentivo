@@ -17,7 +17,7 @@ export function SectionCard({ title, action, actionArrow, icon, children, classN
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className={`rounded-3xl bg-[var(--surface-transparent)] p-5 shadow-card ${className}`}
+      className={`rounded-3xl bg-[var(--surface-transparent)] p-5 ${className}`}
     >
       <header className="flex items-center justify-between mb-4 px-1">
         <h2 className="text-[15px] font-semibold tracking-tight text-foreground">{title}</h2>

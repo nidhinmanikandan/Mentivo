@@ -76,7 +76,7 @@
 }
 
 .light {
-  --background: oklch(0.98 0 0);
+  --background: #ffffff;
   --foreground: oklch(0.15 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.15 0 0);
@@ -100,9 +100,9 @@
   --sidebar-foreground: oklch(0.2 0.01 270);
   --sidebar-accent: oklch(0.92 0.005 270);
   --success: oklch(0.6 0.18 155);
-  --surface-dark: #f7f8fb;
-  --surface-dark-hover: #eef2f7;
-  --surface-dark-active: #e3e8ef;
+  --surface-dark: #f8f8f8;
+  --surface-dark-hover: #eeeeee;
+  --surface-dark-active: #e2e2e2;
   --surface-transparent: #ffffff;
   --brand-blue: #4f7cff;
   --brand-blue-soft: #dfeeff;
