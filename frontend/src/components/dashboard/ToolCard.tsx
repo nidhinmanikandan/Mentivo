@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Bookmark, ArrowUpRight } from "lucide-react";
+import { Bookmark, ArrowRight } from "lucide-react";
 import type { AiTool } from "@/types";
 
 type ToolCardProps = {
@@ -13,40 +13,45 @@ export function ToolCard({ tool, onClick }: ToolCardProps) {
       onClick={onClick}
       whileHover={{ y: -2 }}
       transition={{ duration: 0.2 }}
-      className="rounded-2xl bg-card-elevated p-4 hover:bg-accent transition cursor-pointer group"
+      className="rounded-2xl bg-[#121212] p-[20px] hover:bg-[#242424] transition cursor-pointer group"
     >
-      <div className="flex items-start gap-3">
-        <div className="h-11 w-11 rounded-xl bg-card flex items-center justify-center">
+      <div className="flex items-start gap-2">
+        <div className="h-11 w-11 rounded-xl bg-[#121212] flex items-center justify-center">
           <img
             src={`https://www.google.com/s2/favicons?sz=128&domain=${tool.logoDomain}`}
             alt={tool.name}
-            className="w-8 h-8 rounded-md"
+            className="w-10 h-10 rounded-md"
           />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-2">
+          <div className="flex items-start justify-between gap-4">
             <div>
-              <h3 className="text-[14px] font-semibold text-foreground">{tool.name}</h3>
-              <span className="inline-block mt-1 rounded-md bg-background/40 px-2 py-0.5 text-[10px] text-muted-foreground">
+              <h3 className="text-[16px] font-semibold text-foreground">{tool.name}</h3>
+              <span className="inline-block mt-1 rounded-md bg-[#242424] px-2 py-0.5 text-[10px] font-light">
                 {tool.category}
               </span>
             </div>
             <button className="text-muted-foreground hover:text-foreground transition">
-              <Bookmark className="h-4 w-4" />
+              <Bookmark className="h-4.5 w-4.5" />
             </button>
           </div>
         </div>
       </div>
       <div className="mt-3 flex items-end justify-between gap-3">
         <div className="flex-1">
-          <p className="text-[12px] text-muted-foreground/90 leading-snug">{tool.description}</p>
-          <span className="inline-block mt-2 text-[11px] text-muted-foreground/70">
+          <div className="flex h-[64px] justify-start">
+            <p className="text-[12px] text-[#888888] leading-snug tracking-[-0.04] font-regular">{tool.description}</p>
+          </div>
+          <span className="inline-block mt-2 text-[11px] text-[#888888]">
             #{tool.tag}
           </span>
         </div>
         <div className="flex items-center gap-1 text-[12px] font-medium text-foreground">
           {tool.popularity}
-          <ArrowUpRight className="h-3 w-3 text-emerald-400" />
+          <span className="inline-block mt-2 text-[10px] font-light pb-1">
+            Learn More
+          </span>
+          <ArrowRight className="h-3 w-3 text-white" />
         </div>
       </div>
     </motion.div>
