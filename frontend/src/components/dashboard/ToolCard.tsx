@@ -51,7 +51,7 @@ export function ToolCard({ tool, onClick }: ToolCardProps) {
         <div className="flex items-center gap-1 text-[12px] font-medium text-foreground">
           {tool.popularity}
           <span className="inline-block mt-2 text-[10px] font-light pb-1">Learn More</span>
-          <ArrowRight className="h-3 w-3 text-white" />
+          <ArrowRight className="h-3 w-3 text-foreground" />
         </div>
       </div>
     </motion.div>
