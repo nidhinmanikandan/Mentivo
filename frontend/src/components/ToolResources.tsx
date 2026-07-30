@@ -8,9 +8,7 @@ type Props = {
 export default function ToolResources({ resources }: Props) {
   return (
     <div className="mt-20">
-      <h2 className="text-3xl font-bold mb-8">
-        Resources
-      </h2>
+      <h2 className="text-3xl font-bold mb-8">Resources</h2>
 
       <div className="grid md:grid-cols-2 gap-5">
         {resources.map((resource) => (
@@ -26,18 +24,14 @@ export default function ToolResources({ resources }: Props) {
               transition-all
               duration-300
               hover:scale-[1.02]
-              hover:border-[#7BBEFF]
+              hover:border-[var(--brand-blue)]
               border
               border-transparent
             "
           >
-            <h3 className="text-xl font-semibold">
-              {resource.title}
-            </h3>
+            <h3 className="text-xl font-semibold">{resource.title}</h3>
 
-            <p className="text-muted-foreground mt-2">
-              Open Resource →
-            </p>
+            <p className="text-muted-foreground mt-2">Open Resource →</p>
           </a>
         ))}
       </div>

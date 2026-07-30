@@ -66,6 +66,13 @@
   --sidebar-foreground: oklch(0.85 0.01 270);
   --sidebar-accent: oklch(0.18 0.006 270);
   --success: oklch(0.7 0.18 155);
+  --surface-dark: #121212;
+  --surface-dark-hover: #242424;
+  --surface-dark-active: #2c2c2c;
+  --surface-transparent: transparent;
+  --brand-blue: #7bbeff;
+  --brand-blue-soft: #b9daff;
+  --text-soft-muted: #888888;
 }
 
 .light {
@@ -93,6 +100,13 @@
   --sidebar-foreground: oklch(0.2 0.01 270);
   --sidebar-accent: oklch(0.92 0.005 270);
   --success: oklch(0.6 0.18 155);
+  --surface-dark: #121212;
+  --surface-dark-hover: #242424;
+  --surface-dark-active: #2c2c2c;
+  --surface-transparent: transparent;
+  --brand-blue: #7bbeff;
+  --brand-blue-soft: #b9daff;
+  --text-soft-muted: #6b7280;
 }
 
 @theme inline {

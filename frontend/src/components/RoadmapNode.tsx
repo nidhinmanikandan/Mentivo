@@ -4,11 +4,7 @@ interface Props {
   selected?: boolean;
 }
 
-export default function RoadmapNode({
-  title,
- small,
-  selected,
-}: Props) {
+export default function RoadmapNode({ title, small, selected }: Props) {
   return (
     <div
       className={`
@@ -25,9 +21,7 @@ export default function RoadmapNode({
       hover:scale-105
       hover:shadow-xl
       ${
-        selected
-          ? "bg-violet-500 text-white ring-2 ring-violet-300"
-          : "bg-[#B9DAFF]"
+        selected ? "bg-violet-500 text-white ring-2 ring-violet-300" : "bg-[var(--brand-blue-soft)]"
       }
       ${small ? "w-44 h-14 text-lg" : "w-60 h-16 text-2xl"}
     `}

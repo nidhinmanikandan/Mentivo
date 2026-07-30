@@ -2,7 +2,6 @@ import RoadmapNode from "./RoadmapNode";
 import React from "react";
 import { useEffect, useState } from "react";
 
-
 type Props = {
   tool: any;
 };
@@ -14,19 +13,17 @@ export default function ToolTree({ tool }: Props) {
   return (
     <div className="relative pl-40 py-10">
       {/* Main Timeline */}
-      <div className="absolute left-20 top-10 bottom-10 w-[2px] bg-[#7BBEFF]" />
+      <div className="absolute left-20 top-10 bottom-10 w-[2px] bg-[var(--brand-blue)]" />
 
       {/* Root */}
       <div className="relative mb-28">
         <RoadmapNode title={tool.overview.title} />
 
-        <div className="absolute left-[-88px] top-1/2 h-[2px] w-[88px] bg-[#7BBEFF]" />
+        <div className="absolute left-[-88px] top-1/2 h-[2px] w-[88px] bg-[var(--brand-blue)]" />
       </div>
-
 
       {/* Sections */}
       <div className="space-y-32">
-        
         {tool.journey.map((section: any) => (
           <Section
             section={section}
@@ -51,19 +48,18 @@ function Section({
   return (
     <div className="relative">
       {/* Timeline Dot */}
-      <div className="absolute left-[-72px] top-8 h-5 w-5 rounded-full bg-[#7BBEFF]" />
+      <div className="absolute left-[-72px] top-8 h-5 w-5 rounded-full bg-[var(--brand-blue)]" />
 
       {/* Horizontal */}
-      <div className="absolute left-[-52px] top-10 h-[2px] w-[52px] bg-[#7BBEFF]" />
+      <div className="absolute left-[-52px] top-10 h-[2px] w-[52px] bg-[var(--brand-blue)]" />
 
       {/* Parent */}
       <div className="relative inline-block">
         <RoadmapNode title={section.title} />
-        
 
         {section.children?.length > 0 && (
           <div
-            className="absolute left-1/2 top-full w-[2px] bg-[#7BBEFF]"
+            className="absolute left-1/2 top-full w-[2px] bg-[var(--brand-blue)]"
             style={{
               height: `${section.children.length * 78}px`,
             }}
@@ -97,16 +93,14 @@ function Child({
 }) {
   return (
     <div className="relative flex items-center">
-      <div className="absolute left-[-56px] h-5 w-5 rounded-full bg-[#7BBEFF]" />
+      <div className="absolute left-[-56px] h-5 w-5 rounded-full bg-[var(--brand-blue)]" />
 
-      <div className="absolute left-[-36px] h-[2px] w-[36px] bg-[#7BBEFF]" />
+      <div className="absolute left-[-36px] h-[2px] w-[36px] bg-[var(--brand-blue)]" />
 
       <div className="relative flex items-center">
         <div onClick={() => setSelectedNode(child)}>
           <RoadmapNode title={child.title} small />
         </div>
-
-        
 
         {selectedNode?.title === child.title && (
           <div className="absolute left-[260px] top-1/2 -translate-y-1/2 w-[500px] rounded-3xl bg-card p-6 shadow-xl z-20">

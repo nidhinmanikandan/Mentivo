@@ -26,9 +26,11 @@ export function AiToolsPage() {
   return (
     <DashboardLayout>
       <section className="mb-[72px] mt-[32px] flex flex-col justify-center">
-        <h1 className="text-[48px] font-regular text-foreground flex justify-center tracking-[-0.04em]">Discover AI Tools</h1>
+        <h1 className="text-[48px] font-regular text-foreground flex justify-center tracking-[-0.04em]">
+          Discover AI Tools
+        </h1>
 
-        <p className="text-[20px] text-[#888888] flex justify-center tracking-[-0.04em]">
+        <p className="text-[20px] text-[var(--text-soft-muted)] flex justify-center tracking-[-0.04em]">
           Explore trending tools and generate learning roadmaps for them.
         </p>
       </section>

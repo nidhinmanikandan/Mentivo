@@ -11,8 +11,6 @@ import {
   Sparkles,
 } from "lucide-react";
 
-
-
 type NavEntry = { label: string; icon: React.ElementType; to?: string };
 
 const mainNav = [
@@ -33,9 +31,9 @@ export function Sidebar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
-    <aside className="fixed left-[20px] top-[20px] z-30 flex h-[calc(100vh-40px)] w-[240px] flex-col rounded-[18px] bg-[#121212] px-4 py-6">
+    <aside className="fixed left-[20px] top-[20px] z-30 flex h-[calc(100vh-40px)] w-[240px] flex-col rounded-[18px] bg-[var(--surface-dark)] px-4 py-6">
       <div className="mb-8 flex items-center gap-2 px-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-[16px] bg-[#2C2C2C]">
+        <div className="flex h-10 w-10 items-center justify-center rounded-[16px] bg-[var(--surface-dark-active)]">
           <Sparkles className="h-4 w-4 text-foreground" />
         </div>
         <span className="text-[15px] font-semibold tracking-tight text-foreground">Logo</span>
@@ -61,7 +59,7 @@ function NavItem({ label, icon: Icon, active, to }: NavEntry & { active?: boolea
     active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
   }`;
 
-  const iconClassName = `flex h-10 w-10 items-center justify-center rounded-[16px] bg-[#2C2C2C] transition-all ${
+  const iconClassName = `flex h-10 w-10 items-center justify-center rounded-[16px] bg-[var(--surface-dark-active)] transition-all ${
     active ? "opacity-100" : "opacity-70 hover:opacity-100"
   }`;
 
