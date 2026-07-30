@@ -10,7 +10,7 @@ export function TrendingTools({ tools }: { tools: AiTool[] }) {
 
   return (
     <SectionCard title="Trending AI Tools" action="View all" actionArrow>
-      <div className="flex flex-col gap-3">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {tools.map((tool) => (
           <ToolCard
             key={tool.name}
