@@ -15,7 +15,7 @@ User Profile:
 - Interest: ${profile.interest}
 - Level: ${profile.level}
 
-Recommend exactly 8 modern tools that are most useful for this user.
+Recommend exactly 12 modern tools that are most useful for this user.
 
 Rules:
 - Mix beginner and advanced tools.
@@ -41,15 +41,33 @@ Example:
 ]
 `;
 
-  const result = await model.generateContent(prompt);
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
+    const result = await model.generateContent(prompt);
 
-  const text = result.response
-    .text()
-    .replace(/```json/g, "")
-    .replace(/```/g, "")
-    .trim();
+    const text = result.response
+      .text()
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
 
-  return JSON.parse(text);
+    const tools = JSON.parse(text);
+
+    if (Array.isArray(tools) && tools.length === 12) {
+      return tools;
+    }
+
+    if (attempt === 2) {
+      throw new Error(
+        `Expected 12 modern tools from Gemini, but received ${
+          Array.isArray(tools) ? tools.length : "an invalid response"
+        }.`,
+      );
+    }
+
+    console.log(
+      `Gemini returned ${Array.isArray(tools) ? tools.length : "invalid response"}. Retrying once...`,
+    );
+  }
 }
 
 module.exports = recommendTools;

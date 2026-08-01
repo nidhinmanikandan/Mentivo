@@ -9,15 +9,19 @@ router.get("/", async (req, res) => {
   try {
     const userId = 1;
 
-    // Check cache
+    // Check cache and ensure it contains the expected number of tools
     const cached = await Recommendation.findOne({ userId });
 
-    if (cached) {
+    if (cached && Array.isArray(cached.tools) && cached.tools.length === 12) {
       console.log("Serving cached recommendations");
       return res.json(cached.tools);
     }
 
-    console.log("Generating recommendations with Gemini...");
+    if (cached) {
+      console.log("Cached recommendations invalid or stale, regenerating...");
+    } else {
+      console.log("Generating recommendations with Gemini...");
+    }
 
     const profile = await User.findOne({ userId });
 
@@ -29,10 +33,14 @@ router.get("/", async (req, res) => {
 
     const tools = await recommendTools(profile);
 
-    await Recommendation.create({
-      userId,
-      tools,
-    });
+    if (cached) {
+      await Recommendation.updateOne({ userId }, { tools });
+    } else {
+      await Recommendation.create({
+        userId,
+        tools,
+      });
+    }
 
     res.json(tools);
   } catch (err) {
