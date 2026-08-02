@@ -1,20 +1,23 @@
+import ToolTree from "../ToolTree";
+
 type Props = {
-  toolName: string;
-  roadmap: any[];
+  tool: any;
 };
 
-export function ToolRoadmapDashboard({ toolName, roadmap }: Props) {
+export function ToolRoadmapDashboard({ tool }: Props) {
   return (
-    <div>
-      <h1>{toolName} Roadmap</h1>
+    <div className="w-full h-full">
+      {/* Header */}
 
-      {roadmap.map((step, index) => (
-        <div key={index}>
-          <h3>{step.skill}</h3>
-          <p>{step.difficulty}</p>
-          <p>{step.duration}</p>
-        </div>
-      ))}
+      <div className="mb-12">
+        <h1 className="text-5xl font-regular">{tool.title}</h1>
+
+        <p className="mt-3 text-lg text-muted-foreground max-w-2xl">{tool.description}</p>
+      </div>
+
+      {/* Tree */}
+
+      <ToolTree roadmap={tool.roadmap} />
     </div>
   );
 }

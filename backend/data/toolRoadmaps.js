@@ -1,271 +1,75 @@
 const toolRoadmaps = {
-  Framer: {
-    overview: {
-      title: "Framer",
+  Figma: {
+    title: "Figma",
 
-      category: "Website Builder",
+    description:
+      "Professional UI/UX design tool used for interface design, prototyping and collaboration.",
 
-      tagline: "Design and publish responsive websites visually.",
-
-      description:
-        "Framer is a visual website builder that allows designers and developers to create interactive, responsive websites without writing much code.",
-
-      difficulty: "Intermediate",
-
-      estimatedTime: "2–3 Weeks",
-
-      bestFor: ["Frontend Developers", "UI Designers", "Freelancers"],
-
-      prerequisites: ["Basic UI Design", "Responsive Design"],
-
-      useCases: [
-        "Portfolio Websites",
-        "Landing Pages",
-        "Marketing Sites",
-        "Interactive Prototypes",
-      ],
-    },
-
-    journey: [
+    roadmap: [
       {
-        id: "workspace",
+        id: "figma",
+        parent: null,
 
-        title: "Workspace",
+        title: "Figma",
 
-        description:
-          "Understand the Framer workspace before building anything.",
+        description: "Design interfaces collaboratively.",
 
-        duration: "20 min",
+        steps: [],
+      },
 
-        children: [
-          {
-            title: "Pages",
+      {
+        id: "frames",
+        parent: "figma",
 
-            description: "Learn how pages organize your website.",
+        title: "Frames",
 
-            steps: ["Create a page", "Rename page", "Navigate between pages"],
-          },
+        description: "Create the main design area.",
 
-          {
-            title: "Layers",
+        steps: ["Press F", "Choose a frame size", "Start designing"],
+      },
 
-            description: "Understand how layers organize your design.",
-          },
+      {
+        id: "auto-layout",
+        parent: "frames",
 
-          {
-            title: "Assets",
+        title: "Auto Layout",
 
-            description: "Manage images, icons and reusable assets.",
-          },
-        ],
+        description: "Arrange elements automatically.",
+
+        steps: ["Select two layers", "Right Click", "Add Auto Layout"],
       },
 
       {
         id: "components",
+        parent: "frames",
 
         title: "Components",
 
-        description: "Learn reusable UI.",
+        description: "Create reusable UI elements.",
 
-        duration: "2 hours",
-
-        children: [
-          {
-            title: "Create Component",
-
-            steps: [
-              "Select Frame",
-              "Create Component",
-              "Rename",
-              "Reuse Instance",
-            ],
-          },
-
-          {
-            title: "Variants",
-          },
-
-          {
-            title: "Properties",
-          },
-        ],
+        steps: ["Select object", "Create Component", "Reuse anywhere"],
       },
 
       {
-        id: "cms",
+        id: "variables",
+        parent: "frames",
 
-        title: "CMS",
+        title: "Variables",
 
-        children: [
-          {
-            title: "Collections",
-          },
+        description: "Store reusable colors and values.",
 
-          {
-            title: "Fields",
-          },
-
-          {
-            title: "Dynamic Pages",
-          },
-        ],
-      },
-    ],
-
-    resources: [
-      {
-        title: "Official Documentation",
-        url: "https://www.framer.com/docs/",
+        steps: ["Create Variable", "Assign Value", "Apply to Layers"],
       },
 
       {
-        title: "Framer YouTube Channel",
-        url: "...",
-      },
-    ],
-  },
+        id: "prototype",
+        parent: "auto-layout",
 
-  Cursor: {
-    overview: {
-      title: "Cursor",
+        title: "Prototype",
 
-      category: "AI Code Editor",
+        description: "Connect screens and create interactions.",
 
-      tagline: "Build software faster with AI.",
-
-      description:
-        "Cursor is an AI-powered code editor built on VS Code that helps developers write, edit, and understand code using AI.",
-
-      difficulty: "Beginner",
-
-      estimatedTime: "1–2 Weeks",
-
-      bestFor: ["Frontend Developers", "Backend Developers", "Students"],
-
-      prerequisites: ["Basic Programming", "VS Code Basics"],
-
-      useCases: ["AI Coding", "Debugging", "Code Generation", "Refactoring"],
-    },
-
-    journey: [
-      {
-        id: "setup",
-
-        title: "Setup",
-
-        description: "Install and configure Cursor.",
-
-        duration: "20 min",
-
-        children: [
-          {
-            title: "Install Cursor",
-
-            description: "Download and install Cursor.",
-
-            steps: ["Download Cursor", "Install", "Launch Editor"],
-          },
-
-          {
-            title: "Import VS Code Settings",
-
-            description: "Reuse your extensions and settings.",
-
-            steps: ["Import Extensions", "Import Settings"],
-          },
-
-          {
-            title: "Sign In",
-
-            description: "Connect your Cursor account.",
-
-            steps: ["Create Account", "Login", "Choose Plan"],
-          },
-        ],
-      },
-
-      {
-        id: "editor",
-
-        title: "Editor Basics",
-
-        description: "Learn the Cursor interface.",
-
-        duration: "1 hour",
-
-        children: [
-          {
-            title: "Chat",
-
-            description: "Ask questions about your code.",
-
-            steps: ["Open Chat", "Ask Questions", "Reference Files"],
-          },
-
-          {
-            title: "Composer",
-
-            description: "Generate and edit multiple files.",
-
-            steps: ["Create Prompt", "Generate Code", "Apply Changes"],
-          },
-
-          {
-            title: "Inline Edit",
-
-            description: "Edit code directly using AI.",
-
-            steps: ["Select Code", "Edit with AI", "Accept Changes"],
-          },
-        ],
-      },
-
-      {
-        id: "workflow",
-
-        title: "AI Workflow",
-
-        description: "Use Cursor efficiently in real projects.",
-
-        duration: "2 hours",
-
-        children: [
-          {
-            title: "Agent Mode",
-
-            description: "Let Cursor perform multi-step tasks.",
-
-            steps: ["Enable Agent", "Give Task", "Review Output"],
-          },
-
-          {
-            title: "Codebase Search",
-
-            description: "Understand your project using AI.",
-
-            steps: ["Search Files", "Ask About Code", "Navigate Results"],
-          },
-
-          {
-            title: "Refactoring",
-
-            description: "Improve existing code.",
-
-            steps: ["Select Function", "Refactor", "Review Changes"],
-          },
-        ],
-      },
-    ],
-
-    resources: [
-      {
-        title: "Cursor Documentation",
-        url: "https://cursor.com/docs",
-      },
-
-      {
-        title: "Cursor YouTube",
-        url: "https://www.youtube.com/@cursor_ai",
+        steps: ["Select Frame", "Drag Connection", "Choose Interaction"],
       },
     ],
   },
