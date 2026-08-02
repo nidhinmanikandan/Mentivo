@@ -1,32 +1,57 @@
-interface Props {
+import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
+import "./RoadmapNode.css";
+
+export interface RoadmapNodeData extends Record<string, unknown> {
   title: string;
-  small?: boolean;
-  selected?: boolean;
+  description: string;
+  why?: string;
+  glow?: string;
+  steps: string[];
 }
 
-export default function RoadmapNode({ title, small, selected }: Props) {
+export type RoadmapNodeType = Node<RoadmapNodeData>;
+
+export default function RoadmapNode({ data }: NodeProps<RoadmapNodeType>) {
   return (
     <div
-      className={`
-      rounded-full
-      text-black
-      font-medium
-      flex
-      items-center
-      justify-center
-      shadow-lg
-      transition-all
-      duration-300
-      cursor-pointer
-      hover:scale-105
-      hover:shadow-xl
-      ${
-        selected ? "bg-violet-500 text-white ring-2 ring-violet-300" : "bg-[var(--brand-blue-soft)]"
+      className="node-wrapper"
+      style={
+        {
+          "--glow": data.glow || "rgba(86,156,255,.25)",
+        } as React.CSSProperties
       }
-      ${small ? "w-44 h-14 text-lg" : "w-60 h-16 text-2xl"}
-    `}
     >
-      {title}
+      <div className="roadmap-node">
+        <Handle type="target" position={Position.Left} className="handle" />
+
+        <div className="header">
+          <div className="header-content">
+            <h3>{data.title}</h3>
+            <p>
+              {data.description}
+              {data.why}
+            </p>
+          </div>
+        </div>
+
+        <div className="content-card">
+          <div className="section">
+            <div className="steps">
+              {data.steps.map((step, index) => (
+                <div className="step" key={index}>
+                  <span className={`dot ${index === data.steps.length - 1 ? "green" : "blue"}`} />
+
+                  {step}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="section why-section"></div>
+        </div>
+
+        <Handle type="source" position={Position.Right} className="handle" />
+      </div>
     </div>
   );
 }

@@ -27,15 +27,15 @@ export function ToolRoadmapDashboard({ tool }: Props) {
             <img
               src={logoSrc}
               alt={`${tool.title} logo`}
-              className="h-10 w-10 rounded-md object-contain"
+              className="h-24 w-24 rounded-md object-contain"
             />
           ) : (
             <span className="text-xl font-semibold">{tool.title?.charAt(0) || "T"}</span>
           )}
         </div>
 
-        <div>
-          <h1 className="text-5xl font-regular">{tool.title}</h1>
+        <div className="flex-col justify-center">
+          <h1 className="text-[40px] font-regular">{tool.title}</h1>
           <p className="mt-3 text-lg text-muted-foreground max-w-2xl">{tool.description}</p>
         </div>
       </div>

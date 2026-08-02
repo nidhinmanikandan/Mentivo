@@ -6,7 +6,7 @@ export default function ToolTree({ roadmap }: Props) {
   console.log("Roadmap:", roadmap);
 
   return (
-    <div>
+    <div className="pl-[24px]">
       React Flow Here
     </div>
   );
