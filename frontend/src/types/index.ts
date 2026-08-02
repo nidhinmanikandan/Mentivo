@@ -3,7 +3,8 @@ export interface AiTool {
   category: string;
   description: string;
   officialUrl: string;
-  logoDomain: string;
+  logoDomain?: string;
+  logo?: string;
   isTrending?: boolean;
 
   // Optional UI fields (for old data)

@@ -5,6 +5,9 @@ const toolRoadmaps = {
     description:
       "Professional UI/UX design tool used for interface design, prototyping and collaboration.",
 
+    logoDomain: "figma.com",
+    logo: "https://www.google.com/s2/favicons?sz=128&domain=figma.com",
+
     roadmap: [
       {
         id: "figma",
