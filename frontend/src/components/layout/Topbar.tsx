@@ -6,7 +6,7 @@ export function Topbar() {
 
   return (
     <header className="sticky top-0 z-20 flex h-20 items-center gap-6 bg-background/80 backdrop-blur-xl px-8">
-      <div className="flex-1 max-w-[400px] pl-[16px]">
+      <div className="mt-[24px] flex-1 max-w-[400px] pl-[16px]">
         <div className="relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input

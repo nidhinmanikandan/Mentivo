@@ -184,8 +184,10 @@ export default function ToolTree({ roadmap }: Props) {
   }, []);
 
   return (
-    <div className="w-full h-full">
+    <div className="absolute inset-0 overflow-visible">
       <ReactFlow
+        className="absolute inset-0 overflow-visible"
+        style={{ width: "100%", height: "100%", overflow: "visible" }}
         nodes={layoutedNodes}
         edges={layoutedEdges}
         nodeTypes={nodeTypes}
@@ -196,17 +198,25 @@ export default function ToolTree({ roadmap }: Props) {
         defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
         minZoom={0.5}
         maxZoom={2}
+        nodesDraggable
+        nodesConnectable
+        panOnDrag
+        zoomOnScroll
+        zoomOnPinch
+        zoomOnDoubleClick
+        preventScrolling={false}
+        panOnScroll={false}
         fitViewOptions={{
           padding: 0.45,
           includeHiddenNodes: true,
         }}
         translateExtent={[
-          [-5000, -5000],
-          [5000, 5000],
+          [-10000, -10000],
+          [10000, 10000],
         ]}
         nodeExtent={[
-          [-5000, -5000],
-          [5000, 5000],
+          [-10000, -10000],
+          [10000, 10000],
         ]}
       >
         <Background gap={24} size={1} />
@@ -218,6 +228,7 @@ export default function ToolTree({ roadmap }: Props) {
           zoomStep={0.8}
           maskColor="rgba(0,0,0,.18)"
           bgColor="#181818"
+          style={{ position: "fixed", right: 24, bottom: 24, zIndex: 999, pointerEvents: "auto" }}
         />
       </ReactFlow>
     </div>
