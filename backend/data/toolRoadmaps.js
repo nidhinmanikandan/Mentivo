@@ -11,68 +11,38 @@ const toolRoadmaps = {
     roadmap: [
       {
         id: "figma",
-        parent: null,
-
         title: "Figma",
-
         description: "Design interfaces collaboratively.",
-
         steps: [],
+        parents: [],
       },
-
       {
         id: "frames",
-        parent: "figma",
-
         title: "Frames",
-
         description: "Create the main design area.",
-
         steps: ["Press F", "Choose a frame size", "Start designing"],
+        parents: ["figma"],
       },
-
       {
         id: "auto-layout",
-        parent: "frames",
-
         title: "Auto Layout",
-
         description: "Arrange elements automatically.",
-
         steps: ["Select two layers", "Right Click", "Add Auto Layout"],
+        parents: ["frames"],
       },
-
       {
         id: "components",
-        parent: "frames",
-
         title: "Components",
-
         description: "Create reusable UI elements.",
-
         steps: ["Select object", "Create Component", "Reuse anywhere"],
+        parents: ["frames"],
       },
-
-      {
-        id: "variables",
-        parent: "frames",
-
-        title: "Variables",
-
-        description: "Store reusable colors and values.",
-
-        steps: ["Create Variable", "Assign Value", "Apply to Layers"],
-      },
-
       {
         id: "prototype",
-        parent: "auto-layout",
-
         title: "Prototype",
-
         description: "Connect screens and create interactions.",
-
         steps: ["Select Frame", "Drag Connection", "Choose Interaction"],
+        parents: ["auto-layout", "components"],
       },
     ],
   },

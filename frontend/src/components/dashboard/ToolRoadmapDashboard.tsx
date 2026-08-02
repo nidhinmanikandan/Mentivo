@@ -20,7 +20,7 @@ export function ToolRoadmapDashboard({ tool }: Props) {
   const logoSrc = getLogoSrc(tool);
 
   return (
-    <div className="w-full h-full">
+    <div className="flex h-full flex-col">
       <div className="mb-12 flex items-start gap-4">
         <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-border/60 bg-background/80 shadow-sm">
           {logoSrc ? (
@@ -40,7 +40,9 @@ export function ToolRoadmapDashboard({ tool }: Props) {
         </div>
       </div>
 
-      <ToolTree roadmap={tool.roadmap} />
+      <div className="flex-1 min-h-0">
+        <ToolTree roadmap={tool.roadmap} />
+      </div>
     </div>
   );
 }
