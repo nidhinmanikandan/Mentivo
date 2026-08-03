@@ -1,6 +1,15 @@
 import { useEffect, useState } from "react";
 import { api } from "@/services/api";
-import type { AiTool, RoadmapItem, IndustryTrend, SavedResource, Insight, ProgressStats, LiveTrend, SkillGap } from "@/types";
+import type {
+  AiTool,
+  RoadmapItem,
+  IndustryTrend,
+  SavedResource,
+  Insight,
+  ProgressStats,
+  LiveTrend,
+  SkillGap,
+} from "@/types";
 
 export function useDashboardData() {
   const [tools, setTools] = useState<AiTool[]>([]);
@@ -13,7 +22,7 @@ export function useDashboardData() {
   const [skillGap, setSkillGap] = useState<SkillGap | null>(null);
 
   useEffect(() => {
-    api.getTrendingTools().then(setTools);
+    api.getTools().then(setTools);
     api.getTodayInsight().then(setInsight);
     api.getRoadmap().then(setRoadmap);
     api.getIndustryTrends().then(setTrends);

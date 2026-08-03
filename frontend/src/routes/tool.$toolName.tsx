@@ -15,15 +15,44 @@ function ToolRoadmapPage() {
   const [tool, setTool] = useState<any>(null);
 
   useEffect(() => {
-    api.getToolRoadmap(toolName).then((data) => {
-      setTool(data);
-    });
+    async function loadRoadmap() {
+      try {
+        // Fetch all discovered tools
+        const tools = await api.getTools();
+
+        console.log("Route:", toolName);
+
+        console.log(
+          "Available tools:",
+          tools.map((t: any) => t.name),
+        );
+
+        // Find the selected tool
+        const selectedTool = tools.find(
+          (t: any) =>
+            t.name.trim().toLowerCase() === decodeURIComponent(toolName).trim().toLowerCase(),
+        );
+
+        if (!selectedTool) {
+          throw new Error("Tool not found");
+        }
+
+        // Generate roadmap
+        const roadmap = await api.getToolRoadmap(selectedTool);
+
+        setTool(roadmap);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    loadRoadmap();
   }, [toolName]);
 
   if (!tool) {
     return (
       <DashboardLayout>
-        <div className="p-10">Loading...</div>
+        <div className="p-10">Generating roadmap...</div>
       </DashboardLayout>
     );
   }

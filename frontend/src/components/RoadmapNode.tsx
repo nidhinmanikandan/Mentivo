@@ -1,15 +1,7 @@
-import { Handle, Position, type Node, type NodeProps } from "@xyflow/react";
+import { Handle, Position, type NodeProps } from "@xyflow/react";
+import type { RoadmapNodeType } from "@/types/roadmap";
+
 import "./RoadmapNode.css";
-
-export interface RoadmapNodeData extends Record<string, unknown> {
-  title: string;
-  description: string;
-  why?: string;
-  glow?: string;
-  steps: string[];
-}
-
-export type RoadmapNodeType = Node<RoadmapNodeData>;
 
 export default function RoadmapNode({ data }: NodeProps<RoadmapNodeType>) {
   return (

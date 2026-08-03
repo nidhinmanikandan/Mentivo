@@ -167,8 +167,20 @@ export const api = {
     return response.json();
   },
 
-  async getToolRoadmap(toolName: string) {
-    const res = await fetch(`http://localhost:5000/api/tool-roadmap/${toolName}`);
+  async getToolRoadmap(tool: { name: string; description: string; logoDomain: string }) {
+    const res = await fetch(`${BASE_URL}/api/roadmap`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        tool,
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error("Roadmap generation failed");
+    }
 
     return res.json();
   },

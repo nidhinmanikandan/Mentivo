@@ -18,7 +18,12 @@ import {
 import "@xyflow/react/dist/style.css";
 
 import RoadmapNode from "./RoadmapNode";
-import type { RoadmapNodeData } from "@/types/roadmap";
+
+import type { ToolRoadmap, RoadmapItem, RoadmapNodeData } from "@/types/roadmap";
+
+type Props = {
+  roadmap: ToolRoadmap["roadmap"];
+};
 
 const NODE_WIDTH = 320;
 const NODE_HEIGHT = 160;
@@ -27,15 +32,6 @@ const VERTICAL_GAP = 180;
 
 const CANVAS_PADDING_X = 300;
 const CANVAS_PADDING_Y = 200;
-
-interface RoadmapItem extends RoadmapNodeData {
-  id: string;
-  parents?: string[];
-}
-
-type Props = {
-  roadmap: RoadmapItem[];
-};
 
 type RoadmapNodeItem = Node<RoadmapNodeData, "roadmap">;
 
@@ -128,6 +124,9 @@ function getLayoutedNodes(nodes: RoadmapNodeItem[], roadmap: RoadmapItem[]): Lay
 }
 
 export default function ToolTree({ roadmap }: Props) {
+  if (!roadmap || roadmap.length === 0) {
+    return <div className="flex h-full items-center justify-center">Generating roadmap...</div>;
+  }
   const nodes = useMemo<RoadmapNodeItem[]>(() => {
     return roadmap.map((item) => ({
       id: item.id,
