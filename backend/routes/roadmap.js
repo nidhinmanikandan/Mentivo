@@ -1,34 +1,45 @@
 const express = require("express");
 const router = express.Router();
 
-const users = require("../data/users");
-const careers = require("../data/careers");
+const Roadmap = require("../models/Roadmap");
+const generateRoadmap = require("../services/aiRoadmapRecommendation");
 
-router.get("/:userId", (req, res) => {
-  const userId = Number(req.params.userId);
+router.post("/", async (req, res) => {
+  try {
+    const { tool } = req.body;
 
-  const user = users.find((u) => u.id === userId);
+    if (!tool?.name) {
+      return res.status(400).json({
+        error: "Tool is required",
+      });
+    }
 
-  if (!user) {
-    return res.status(404).json({
-      error: "User not found",
+    const cached = await Roadmap.findOne({
+      toolName: tool.name,
+    });
+
+    if (cached) {
+      console.log("Serving cached roadmap");
+      return res.json(cached.roadmap);
+    }
+
+    console.log("Generating roadmap with Gemini...");
+
+    const roadmap = await generateRoadmap(tool);
+
+    await Roadmap.create({
+      toolName: tool.name,
+      roadmap,
+    });
+
+    res.json(roadmap);
+  } catch (err) {
+    console.error(err);
+
+    res.status(500).json({
+      error: "Roadmap generation failed",
     });
   }
-
-  const roadmap = careers[user.targetRole];
-
-  const roadmapWithStatus = roadmap.map((item) => ({
-    skill: item.skill,
-    completed: user.completedSkills.includes(item.skill),
-    difficulty: item.difficulty,
-    duration: item.duration,
-    priority: item.priority,
-  }));
-
-  res.json({
-    targetRole: user.targetRole,
-    roadmap: roadmapWithStatus,
-  });
 });
 
 module.exports = router;
