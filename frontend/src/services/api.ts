@@ -18,7 +18,10 @@ import {
 const delay = <T>(data: T, ms = 0): Promise<T> => new Promise((r) => setTimeout(() => r(data), ms));
 
 export const api = {
-  getTrendingTools: () => delay(trendingTools),
+  getTrendingTools: async () => {
+    const res = await fetch(`${BASE_URL}/api/tools`);
+    return res.json();
+  },
   getTodayInsight: () => delay(todayInsight),
   getRoadmap: async () => {
     const response = await fetch(`${BASE_URL}/api/roadmap/1`);
