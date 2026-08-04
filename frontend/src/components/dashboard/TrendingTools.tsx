@@ -4,6 +4,7 @@ import { SectionCard } from "./SectionCard";
 import { ToolCard } from "./ToolCard";
 
 import type { AiTool } from "@/types";
+import { setSelectedTool } from "@/lib/toolStore";
 
 export function TrendingTools({ tools }: { tools: AiTool[] }) {
   const navigate = useNavigate();
@@ -15,14 +16,16 @@ export function TrendingTools({ tools }: { tools: AiTool[] }) {
           <ToolCard
             key={tool.name}
             tool={tool}
-            onClick={() =>
+            onClick={() => {
+              setSelectedTool(tool);
+
               navigate({
                 to: "/tool/$toolName",
                 params: {
                   toolName: tool.name,
                 },
-              })
-            }
+              });
+            }}
           />
         ))}
       </div>

@@ -14,6 +14,7 @@ import {
   careerGoalOptions,
   careerGoalState,
 } from "./mockData";
+import type { AiTool } from "@/types";
 
 const delay = <T>(data: T, ms = 0): Promise<T> => new Promise((r) => setTimeout(() => r(data), ms));
 
@@ -170,15 +171,13 @@ export const api = {
     return response.json();
   },
 
-  async getToolRoadmap(tool: { name: string; description: string; logoDomain: string }) {
+  async getToolRoadmap(tool: AiTool) {
     const res = await fetch(`${BASE_URL}/api/roadmap`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        tool,
-      }),
+      body: JSON.stringify({ tool }),
     });
 
     if (!res.ok) {
