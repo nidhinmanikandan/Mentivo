@@ -1,12 +1,11 @@
 const Tool = require("../models/Tool");
 
-async function runEnrichment(){
+async function runEnrichment() {
+  const tools = await Tool.find({
+    $or: [{ enriched: false }, { enriched: { $exists: false } }],
+  });
 
-    const tools = await Tool.find({
-        enriched:false
-    });
-
-    console.log(`Need enrichment: ${tools.length}`);
+  console.log(`Need enrichment: ${tools.length}`);
 }
 
 module.exports = runEnrichment;

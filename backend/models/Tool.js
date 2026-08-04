@@ -54,9 +54,6 @@ const ToolSchema = new mongoose.Schema(
       default: [],
     },
 
-    officialWebsite: String,
-
-    documentationUrl: String,
 
     features: {
       type: [String],
@@ -68,6 +65,21 @@ const ToolSchema = new mongoose.Schema(
     logo: String,
 
     enriched: {
+      type: Boolean,
+      default: false,
+    },
+
+    officialWebsite: {
+      type: String,
+      default: "",
+    },
+
+    documentationUrl: {
+      type: String,
+      default: "",
+    },
+
+    resolved: {
       type: Boolean,
       default: false,
     },
