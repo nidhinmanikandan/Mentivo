@@ -48,10 +48,28 @@ const ToolSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    
+
     searchKeywords: {
       type: [String],
       default: [],
+    },
+
+    officialWebsite: String,
+
+    documentationUrl: String,
+
+    features: {
+      type: [String],
+      default: [],
+    },
+
+    pricing: String,
+
+    logo: String,
+
+    enriched: {
+      type: Boolean,
+      default: false,
     },
   },
   {

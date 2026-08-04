@@ -5,7 +5,7 @@ const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
 });
 
-module.exports = async function githubCollector() {
+module.exports = async function githubSearchCollector() {
   console.log("Collecting GitHub repositories...");
 
   const result = await octokit.search.repos({
@@ -27,7 +27,7 @@ module.exports = async function githubCollector() {
         tags: repo.topics || [],
         platform: "GitHub",
         isTrending: true,
-        source: "GitHub",
+        source: "github-search",
       },
       { upsert: true },
     );
