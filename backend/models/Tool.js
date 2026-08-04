@@ -48,10 +48,15 @@ const ToolSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    
+    searchKeywords: {
+      type: [String],
+      default: [],
+    },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 module.exports = mongoose.model("Tool", ToolSchema);
