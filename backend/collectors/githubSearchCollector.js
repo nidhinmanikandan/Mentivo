@@ -16,17 +16,29 @@ module.exports = async function githubSearchCollector() {
   });
 
   for (const repo of result.data.items) {
-    await Tool.updateOne(
-      { officialUrl: repo.html_url },
+    await CandidateTool.updateOne(
+      { githubUrl: repo.html_url },
       {
         name: repo.name,
         category: "GitHub Project",
         description: repo.description || "",
-        officialUrl: repo.html_url,
+
+        // Official website (preferred)
+        officialUrl: repo.homepage || repo.html_url,
+
+        // GitHub metadata
+        githubUrl: repo.html_url,
+        githubStars: repo.stargazers_count,
+        githubForks: repo.forks_count,
+
         logoDomain: "github.com",
+
         tags: repo.topics || [],
-        platform: "GitHub",
+
+        platform: repo.language || "",
+
         isTrending: true,
+
         source: "github-search",
       },
       { upsert: true },

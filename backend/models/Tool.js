@@ -54,7 +54,6 @@ const ToolSchema = new mongoose.Schema(
       default: [],
     },
 
-
     features: {
       type: [String],
       default: [],
@@ -82,6 +81,21 @@ const ToolSchema = new mongoose.Schema(
     resolved: {
       type: Boolean,
       default: false,
+    },
+
+    githubUrl: {
+      type: String,
+      default: "",
+    },
+
+    githubStars: {
+      type: Number,
+      default: 0,
+    },
+
+    githubForks: {
+      type: Number,
+      default: 0,
     },
   },
   {
