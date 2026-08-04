@@ -1,5 +1,6 @@
 const { Octokit } = require("@octokit/rest");
 const Tool = require("../models/Tool");
+const CandidateTool = require("../models/CandidateTool");
 
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
