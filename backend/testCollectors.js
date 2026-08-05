@@ -15,11 +15,13 @@ async function test() {
 
   await runValidation();
 
-  await runEnrichment();
-
   await runResolver();
 
-  await websiteEnricher();
+  await runEnrichment();
+
+  
+
+  
 
   process.exit(0);
 }

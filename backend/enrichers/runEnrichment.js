@@ -1,11 +1,12 @@
 const Tool = require("../models/Tool");
+const websiteEnricher = require("./websiteEnricher");
 
 async function runEnrichment() {
-  const tools = await Tool.find({
-    $or: [{ enriched: false }, { enriched: { $exists: false } }],
-  });
+  console.log("Running Website Enrichment...");
 
-  console.log(`Need enrichment: ${tools.length}`);
+  await websiteEnricher();
+
+  console.log("Website Enrichment Finished.");
 }
 
 module.exports = runEnrichment;
