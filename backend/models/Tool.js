@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const ToolSchema = new mongoose.Schema(
   {
+    //Basic info
     name: {
       type: String,
       required: true,
@@ -19,7 +20,72 @@ const ToolSchema = new mongoose.Schema(
       default: "",
     },
 
+    tags: {
+      type: [String],
+      default: [],
+    },
+
+    //Links
     officialUrl: {
+      type: String,
+      default: "",
+    },
+
+    githubUrl: {
+      type: String,
+      default: "",
+    },
+
+    documentation: {
+      type: [String],
+      default: [],
+    },
+
+    //Discovery
+    source: {
+      type: String,
+      required: true,
+    },
+
+    isTrending: {
+      type: Boolean,
+      default: false,
+    },
+
+    validated: {
+      type: Boolean,
+      default: false,
+    },
+
+    resolved: {
+      type: Boolean,
+      default: false,
+    },
+
+    enriched: {
+      type: Boolean,
+      default: false,
+    },
+
+    //Website
+    logo: {
+      type: String,
+      default: "",
+    },
+
+    screenshots: [String],
+
+    features: {
+      type: [String],
+      default: [],
+    },
+
+    gettingStarted: {
+      type: String,
+      default: "",
+    },
+
+    pricing: {
       type: String,
       default: "",
     },
@@ -29,65 +95,12 @@ const ToolSchema = new mongoose.Schema(
       default: "",
     },
 
-    tags: {
+    platforms: {
       type: [String],
       default: [],
     },
 
-    platform: {
-      type: String,
-      default: "",
-    },
-
-    isTrending: {
-      type: Boolean,
-      default: false,
-    },
-
-    source: {
-      type: String,
-      required: true,
-    },
-
-    searchKeywords: {
-      type: [String],
-      default: [],
-    },
-
-    features: {
-      type: [String],
-      default: [],
-    },
-
-    pricing: String,
-
-    logo: String,
-
-    enriched: {
-      type: Boolean,
-      default: false,
-    },
-
-    officialWebsite: {
-      type: String,
-      default: "",
-    },
-
-    documentationUrl: {
-      type: String,
-      default: "",
-    },
-
-    resolved: {
-      type: Boolean,
-      default: false,
-    },
-
-    githubUrl: {
-      type: String,
-      default: "",
-    },
-
+    //GitHub
     githubStars: {
       type: Number,
       default: 0,
@@ -97,6 +110,20 @@ const ToolSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+
+    //Recommendation
+    score: {
+      type: Number,
+      default: 0,
+    },
+
+    searchKeywords: {
+      type: [String],
+      default: [],
+    },
+
+    //Maintenance
+    lastChecked: Date,
   },
   {
     timestamps: true,
