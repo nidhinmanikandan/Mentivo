@@ -30,8 +30,8 @@ const NODE_HEIGHT = 160;
 const HORIZONTAL_GAP = 220;
 const VERTICAL_GAP = 180;
 
-const CANVAS_PADDING_X = 300;
-const CANVAS_PADDING_Y = 200;
+const CANVAS_PADDING_X = 80;
+const CANVAS_PADDING_Y = 60;
 
 type RoadmapNodeItem = Node<RoadmapNodeData, "roadmap">;
 
@@ -193,8 +193,7 @@ export default function ToolTree({ roadmap }: Props) {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        fitView
-        defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
+        defaultViewport={{ x: 0, y: 100, zoom: 0.4 }}
         minZoom={0.5}
         maxZoom={2}
         nodesDraggable
@@ -205,10 +204,6 @@ export default function ToolTree({ roadmap }: Props) {
         zoomOnDoubleClick
         preventScrolling={false}
         panOnScroll={false}
-        fitViewOptions={{
-          padding: 0.45,
-          includeHiddenNodes: true,
-        }}
         translateExtent={[
           [-10000, -10000],
           [10000, 10000],

@@ -13,7 +13,30 @@ const CandidateToolSchema = new mongoose.Schema(
 
     platform: String,
 
-    source: String,
+    sources: [
+      {
+        type: String, // github, hackernews, reddit, npm, etc.
+        url: String,
+        externalId: String,
+        metadata: mongoose.Schema.Types.Mixed,
+        discoveredAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
+
+    discoveryScore: {
+      type: Number,
+      default: 0,
+    },
+
+    mentionCount: {
+      type: Number,
+      default: 0,
+    },
+
+    lastDiscoveredAt: Date,
 
     validationStatus: {
       type: String,
