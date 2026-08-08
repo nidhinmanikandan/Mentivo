@@ -7,23 +7,39 @@ const TOOL_KEYWORDS = [
   "platform",
   "library",
   "framework",
-  "open source",
-  "developer tool",
-  "ai tool",
-  "cli",
   "editor",
   "browser",
   "api",
   "sdk",
+  "cli",
+  "plugin",
+  "service",
+  "developer",
+  "ai",
+  "open source",
+  "github",
 ];
 
 function isToolCandidate(story) {
-  const text = `${story.title || ""} ${story.text || ""}`.toLowerCase();
+  const title = (story.title || "").toLowerCase();
+  const url = (story.url || "").toLowerCase();
 
-  return TOOL_KEYWORDS.some((keyword) => {
+  // Strong signals in the title
+  const titleMatch = TOOL_KEYWORDS.some((keyword) => {
     const pattern = new RegExp(`\\b${keyword}\\b`, "i");
-    return pattern.test(text);
+    return pattern.test(title);
   });
+
+  // Software-related domains
+  const domainMatch =
+    url.includes("github.com") ||
+    url.includes("npmjs.com") ||
+    url.includes("pypi.org") ||
+    url.includes("huggingface.co") ||
+    url.includes("vercel.com") ||
+    url.includes("producthunt.com");
+
+  return titleMatch || domainMatch;
 }
 
 async function collectHackerNewsTools() {
@@ -32,7 +48,7 @@ async function collectHackerNewsTools() {
       "https://hacker-news.firebaseio.com/v0/topstories.json",
     );
 
-    const storyIds = response.data.slice(0, 20);
+    const storyIds = response.data.slice(0, 50);
 
     const stories = await Promise.all(
       storyIds.map(async (id) => {
