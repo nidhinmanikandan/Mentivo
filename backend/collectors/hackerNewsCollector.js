@@ -20,13 +20,16 @@ const TOOL_KEYWORDS = [
 function isToolCandidate(story) {
   const text = `${story.title || ""} ${story.text || ""}`.toLowerCase();
 
-  return TOOL_KEYWORDS.some((keyword) => text.includes(keyword));
+  return TOOL_KEYWORDS.some((keyword) => {
+    const pattern = new RegExp(`\\b${keyword}\\b`, "i");
+    return pattern.test(text);
+  });
 }
 
 async function collectHackerNewsTools() {
   try {
     const response = await axios.get(
-      "https://hacker-news.firebaseio.com/v0/topstories.json"
+      "https://hacker-news.firebaseio.com/v0/topstories.json",
     );
 
     const storyIds = response.data.slice(0, 20);
@@ -34,23 +37,19 @@ async function collectHackerNewsTools() {
     const stories = await Promise.all(
       storyIds.map(async (id) => {
         const result = await axios.get(
-          `https://hacker-news.firebaseio.com/v0/item/${id}.json`
+          `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
         );
 
         return result.data;
-      })
+      }),
     );
 
     // Detect stories that may represent tools
     const candidates = stories.filter(isToolCandidate);
 
-    console.log(
-      `Fetched ${stories.length} Hacker News stories.`
-    );
+    console.log(`Fetched ${stories.length} Hacker News stories.`);
 
-    console.log(
-      `Detected ${candidates.length} potential tool stories:\n`
-    );
+    console.log(`Detected ${candidates.length} potential tool stories:\n`);
 
     candidates.forEach((story, index) => {
       console.log(`${index + 1}. ${story.title}`);
@@ -63,8 +62,7 @@ async function collectHackerNewsTools() {
       description: story.text || story.title,
 
       officialUrl:
-        story.url ||
-        `https://news.ycombinator.com/item?id=${story.id}`,
+        story.url || `https://news.ycombinator.com/item?id=${story.id}`,
 
       sources: [
         {
@@ -86,7 +84,7 @@ async function collectHackerNewsTools() {
   } catch (error) {
     console.error(
       "Hacker News Collector Error:",
-      error.response?.status || error.message
+      error.response?.status || error.message,
     );
 
     return [];
