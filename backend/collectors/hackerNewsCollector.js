@@ -14,32 +14,33 @@ const TOOL_KEYWORDS = [
   "cli",
   "plugin",
   "service",
-  "developer",
-  "ai",
   "open source",
-  "github",
 ];
 
-function isToolCandidate(story) {
+function getToolScore(story) {
   const title = (story.title || "").toLowerCase();
   const url = (story.url || "").toLowerCase();
 
-  // Strong signals in the title
-  const titleMatch = TOOL_KEYWORDS.some((keyword) => {
+  let score = 0;
+
+  // Strong software/tool signals
+  TOOL_KEYWORDS.forEach((keyword) => {
     const pattern = new RegExp(`\\b${keyword}\\b`, "i");
-    return pattern.test(title);
+
+    if (pattern.test(title)) {
+      score += 0.2;
+    }
   });
 
-  // Software-related domains
-  const domainMatch =
-    url.includes("github.com") ||
-    url.includes("npmjs.com") ||
-    url.includes("pypi.org") ||
-    url.includes("huggingface.co") ||
-    url.includes("vercel.com") ||
-    url.includes("producthunt.com");
+  // Strong source/domain signals
+  if (url.includes("github.com")) score += 0.4;
+  if (url.includes("npmjs.com")) score += 0.4;
+  if (url.includes("pypi.org")) score += 0.4;
+  if (url.includes("huggingface.co")) score += 0.4;
+  if (url.includes("producthunt.com")) score += 0.4;
 
-  return titleMatch || domainMatch;
+  // Limit score to 1
+  return Math.min(score, 1);
 }
 
 async function collectHackerNewsTools() {
@@ -61,14 +62,21 @@ async function collectHackerNewsTools() {
     );
 
     // Detect stories that may represent tools
-    const candidates = stories.filter(isToolCandidate);
+    const candidates = stories
+      .map((story) => ({
+        ...story,
+        toolScore: getToolScore(story),
+      }))
+      .filter((story) => story.toolScore >= 0.4);
 
     console.log(`Fetched ${stories.length} Hacker News stories.`);
 
     console.log(`Detected ${candidates.length} potential tool stories:\n`);
 
     candidates.forEach((story, index) => {
-      console.log(`${index + 1}. ${story.title}`);
+      console.log(
+        `${index + 1}. ${story.title} [score: ${story.toolScore.toFixed(2)}]`,
+      );
     });
 
     // Convert detected stories into CandidateTool-compatible objects
