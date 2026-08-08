@@ -23,24 +23,62 @@ function getToolScore(story) {
 
   let score = 0;
 
-  // Strong software/tool signals
-  TOOL_KEYWORDS.forEach((keyword) => {
-    const pattern = new RegExp(`\\b${keyword}\\b`, "i");
+  // Strong signals that the story is actually presenting a tool
+  const strongSignals = [
+    "tool",
+    "app",
+    "platform",
+    "library",
+    "framework",
+    "plugin",
+    "browser",
+    "editor",
+    "service",
+    "released",
+    "launches",
+    "introducing",
+    "open source",
+  ];
 
-    if (pattern.test(title)) {
-      score += 0.2;
+  strongSignals.forEach((keyword) => {
+    if (title.includes(keyword)) {
+      score += 0.3;
     }
   });
 
-  // Strong source/domain signals
-  if (url.includes("github.com")) score += 0.4;
-  if (url.includes("npmjs.com")) score += 0.4;
-  if (url.includes("pypi.org")) score += 0.4;
-  if (url.includes("huggingface.co")) score += 0.4;
-  if (url.includes("producthunt.com")) score += 0.4;
+  // Strong source signals
+  if (url.includes("github.com")) score += 0.5;
+  if (url.includes("npmjs.com")) score += 0.5;
+  if (url.includes("pypi.org")) score += 0.5;
+  if (url.includes("huggingface.co")) score += 0.5;
+  if (url.includes("producthunt.com")) score += 0.5;
 
-  // Limit score to 1
-  return Math.min(score, 1);
+  // Negative signals: usually articles/news rather than tools
+  const negativeSignals = [
+    "war",
+    "attack",
+    "backdoor",
+    "psychological",
+    "hall of shame",
+    "deaths",
+    "costs",
+    "bans",
+    "history",
+    "2014",
+    "2015",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+  ];
+
+  negativeSignals.forEach((keyword) => {
+    if (title.includes(keyword)) {
+      score -= 0.4;
+    }
+  });
+
+  return Math.max(0, Math.min(score, 1));
 }
 
 async function collectHackerNewsTools() {
